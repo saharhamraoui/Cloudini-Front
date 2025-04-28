@@ -1,0 +1,163 @@
+.container {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.role-selection-card {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  max-width: 900px;
+  width: 90%;
+  margin: 0 auto;
+  animation: slideIn 0.8s ease-out forwards;
+}
+
+h2 {
+  color: #1a202c;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.role-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.btn-role {
+  padding: 1.5rem;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-role i {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.btn-role span {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.btn-role:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-role:hover i {
+  transform: scale(1.1);
+}
+
+.btn-role:hover span {
+  transform: scale(1.05);
+}
+
+.btn-role:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-patient {
+  background: linear-gradient(45deg, #4299e1, #3182ce);
+  color: #fff;
+}
+
+.btn-patient:hover {
+  background: linear-gradient(45deg, #2b6cb0, #2c5282);
+}
+
+.btn-doctor {
+  background: linear-gradient(45deg, #48bb78, #38a169);
+  color: #fff;
+}
+
+.btn-doctor:hover {
+  background: linear-gradient(45deg, #2f855a, #276749);
+}
+
+.btn-driver {
+  background: linear-gradient(45deg, #f6ad55, #ed8936);
+  color: #fff;
+}
+
+.btn-driver:hover {
+  background: linear-gradient(45deg, #dd6b20, #c05621);
+}
+
+/* Add a subtle overlay effect on hover */
+.btn-role::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-role:hover::before {
+  opacity: 1;
+}
+
+/* Animations */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .role-selection-card {
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .role-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-role {
+    padding: 1.2rem;
+  }
+
+  .btn-role i {
+    font-size: 2rem;
+  }
+
+  .btn-role span {
+    font-size: 0.9rem;
+  }
+}

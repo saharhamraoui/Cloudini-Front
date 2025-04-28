@@ -1,0 +1,59 @@
+<aside class="sidebar" [ngClass]="{'collapsed': isCollapsed}">
+  <div class="sidebar-header">
+    <div class="avatar">{{ getAvatarInitials() }}</div>
+    <div class="user-info" *ngIf="!isCollapsed">
+      <span class="user-name">{{ currentUser.firstName }} {{ currentUser.lastName }}</span>
+      <span class="user-role">{{ currentUser.role }}</span>
+    </div>
+    <button class="toggle-btn" (click)="toggleSidebar()">
+      <i class="fas" [ngClass]="isCollapsed ? 'fa-angle-right' : 'fa-angle-left'"></i>
+    </button>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="nav-item" routerLink="/admin/dashboard" routerLinkActive="active" *ngIf="isAdmin">
+      <i class="fas fa-tachometer-alt"></i>
+      <span *ngIf="!isCollapsed">Tableau de bord</span>
+    </a>
+    <a class="nav-item" routerLink="/admin/users" routerLinkActive="active" *ngIf="isAdmin">
+      <i class="fas fa-users"></i>
+      <span *ngIf="!isCollapsed">Utilisateurs</span>
+    </a>
+    <a class="nav-item" routerLink="/admin/patients" routerLinkActive="active" *ngIf="isMedecinOrAdmin">
+      <i class="fas fa-procedures"></i>
+      <span *ngIf="!isCollapsed">Patients</span>
+    </a>
+    <a class="nav-item" routerLink="/admin/appointments" routerLinkActive="active" *ngIf="isMedecinOrAdmin">
+      <i class="fas fa-calendar-check"></i>
+      <span *ngIf="!isCollapsed">Rendez-vous</span>
+    </a>
+    <button class="nav-item" (click)="toggleTasks()" [ngClass]="{'active': showTasks}">
+      <i class="fas fa-tasks"></i>
+      <span *ngIf="!isCollapsed">Tâches à faire</span>
+    </button>
+  </nav>
+  <div class="sidebar-footer" *ngIf="!isCollapsed">
+    <button class="logout-btn" (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i> Déconnexion
+    </button>
+  </div>
+  <!-- Tasks Panel -->
+  <div class="tasks-panel" *ngIf="showTasks">
+    <div class="tasks-header">
+      <h3>Tâches à faire</h3>
+      <button class="close-tasks" (click)="toggleTasks()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="tasks-content">
+      <div class="loading-spinner" *ngIf="isLoadingTasks">
+        <i class="fas fa-spinner fa-spin"></i> Chargement...
+      </div>
+      <ul *ngIf="!isLoadingTasks">
+        <li *ngFor="let task of tasks; let i = index" class="task-item" [@taskFadeIn]="i">
+          <input type="checkbox" [(ngModel)]="task.completed">
+          <span [ngClass]="{'completed': task.completed}">{{ task.title }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</aside>

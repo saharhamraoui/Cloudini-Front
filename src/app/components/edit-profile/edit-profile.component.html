@@ -1,0 +1,151 @@
+<div class="profile-edit-container">
+  <div class="profile-edit-card">
+    <div class="profile-edit-header">
+      <h2><i class="fas fa-user-edit me-2"></i>Modifier mon profil</h2>
+    </div>
+    
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="profile-edit-form">
+      <!-- Section Informations de base -->
+      <div class="section-title">
+        <i class="fas fa-id-card"></i> Informations personnelles
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Prénom <span class="required">*</span></label>
+          <input type="text" formControlName="firstName" 
+                 [class.is-invalid]="editForm.get('firstName')?.invalid && editForm.get('firstName')?.touched">
+          <div *ngIf="editForm.get('firstName')?.invalid && editForm.get('firstName')?.touched" 
+               class="invalid-feedback">
+            Le prénom est obligatoire
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Nom <span class="required">*</span></label>
+          <input type="text" formControlName="lastName"
+                 [class.is-invalid]="editForm.get('lastName')?.invalid && editForm.get('lastName')?.touched">
+          <div *ngIf="editForm.get('lastName')?.invalid && editForm.get('lastName')?.touched" 
+               class="invalid-feedback">
+            Le nom est obligatoire
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Email <span class="required">*</span></label>
+          <input type="email" formControlName="email"
+                 [class.is-invalid]="editForm.get('email')?.invalid && editForm.get('email')?.touched">
+          <div *ngIf="editForm.get('email')?.invalid && editForm.get('email')?.touched" 
+               class="invalid-feedback">
+            <span *ngIf="editForm.get('email')?.errors?.['required']">L'email est obligatoire</span>
+            <span *ngIf="editForm.get('email')?.errors?.['email']">Veuillez entrer un email valide</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Téléphone</label>
+          <input type="text" formControlName="phoneNumber">
+        </div>
+        
+        <div class="form-group full-width">
+          <label>Adresse</label>
+          <input type="text" formControlName="address">
+        </div>
+      </div>
+      
+      <!-- Section Patient -->
+      <div *ngIf="userType === 'PATIENT' && editForm.get('medicalRecordNumber')">
+        <div class="section-title">
+          <i class="fas fa-heartbeat"></i> Informations médicales
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>N° dossier médical</label>
+            <input type="text" formControlName="medicalRecordNumber">
+          </div>
+          
+          <div class="form-group">
+            <label>Groupe sanguin</label>
+            <input type="text" formControlName="bloodGroup">
+          </div>
+          
+          <div class="form-group">
+            <label>N° assurance maladie</label>
+            <input type="text" formControlName="healthInsuranceNumber">
+          </div>
+          
+          <div class="form-group">
+            <label>Genre</label>
+            <select formControlName="gender">
+              <option value="M">Masculin</option>
+              <option value="F">Féminin</option>
+              <option value="O">Autre</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Date de naissance</label>
+            <input type="date" formControlName="dateOfBirth">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Section Médecin -->
+      <div *ngIf="userType === 'MEDECIN' && editForm.get('speciality')">
+        <div class="section-title">
+          <i class="fas fa-user-md"></i> Informations professionnelles
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Spécialité</label>
+            <input type="text" formControlName="speciality">
+          </div>
+          
+          <div class="form-group">
+            <label>N° licence</label>
+            <input type="text" formControlName="licenseNumber">
+          </div>
+          
+          <div class="form-group">
+            <label>Disponibilité</label>
+            <select formControlName="availability">
+              <option value="AVAILABLE">Disponible</option>
+              <option value="UNAVAILABLE">Indisponible</option>
+              <option value="ON_VACATION">En vacances</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Section Chauffeur -->
+      <div *ngIf="userType === 'CHAUFFEUR' && editForm.get('driverLicenseNumber')">
+        <div class="section-title">
+          <i class="fas fa-taxi"></i> Informations professionnelles
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>N° permis</label>
+            <input type="text" formControlName="driverLicenseNumber">
+          </div>
+          
+          <div class="form-group">
+            <label>Disponibilité</label>
+            <select formControlName="driverAvailability">
+              <option value="AVAILABLE">Disponible</option>
+              <option value="UNAVAILABLE">Indisponible</option>
+              <option value="ON_MISSION">En mission</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-actions">
+        <button type="button" class="btn btn-cancel" (click)="cancel()">
+          <i class="fas fa-times"></i> Annuler
+        </button>
+        <button type="submit" class="btn btn-save" [disabled]="editForm.invalid">
+          <i class="fas fa-save"></i> Enregistrer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

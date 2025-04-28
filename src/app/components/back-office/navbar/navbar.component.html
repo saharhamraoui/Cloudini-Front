@@ -1,0 +1,17 @@
+<nav class="navbar" [ngClass]="{'dark-mode': isDarkMode}">
+  <div class="navbar-content">
+    <div class="navbar-brand">
+      <i class="fas fa-shield-alt"></i>
+      <span>Administration</span>
+    </div>
+    <div class="user-section">
+      <button class="theme-toggle" (click)="toggleDarkMode()" title="Toggle Dark Mode">
+        <i class="fas" [ngClass]="isDarkMode ? 'fa-sun' : 'fa-moon'"></i>
+      </button>
+      <div class="user-profile">
+        <span class="avatar">{{ userName.charAt(0).toUpperCase() }}</span>
+        <span class="user-name">{{ userName }}</span>
+      </div>
+    </div>
+  </div>
+</nav>

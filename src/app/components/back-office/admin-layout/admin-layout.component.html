@@ -1,0 +1,15 @@
+<div class="admin-layout" [ngClass]="{'sidebar-collapsed': isSidebarCollapsed, 'tasks-visible': isTasksVisible}">
+  <!-- Sidebar Component -->
+  <app-sidebar (sidebarToggled)="onToggleSidebar()" (tasksToggled)="onTasksToggled($event)"></app-sidebar>
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <!-- Navbar Component -->
+    <app-navbar></app-navbar>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

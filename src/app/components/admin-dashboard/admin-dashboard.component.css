@@ -1,0 +1,431 @@
+/* Professional Admin Dashboard CSS */
+.admin-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1A202C;
+  background: linear-gradient(145deg, #E6F0FA 0%, #F7FAFC 100%);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+/* Dashboard Wrapper for Spacious Layout */
+.dashboard-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header */
+.dashboard-header {
+  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+  color: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(30, 58, 138, 0.2);
+  animation: fadeIn 0.5s ease-out;
+}
+.sentiment-analysis {
+  margin-top: 2rem;
+}
+
+.sentiment-cards {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.sentiment-card {
+  flex: 1;
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.sentiment-card:hover {
+  transform: translateY(-5px);
+}
+
+.sentiment-card .icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.sentiment-card .count {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.sentiment-card .label {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.positive { background-color: #e8f5e9; color: #2e7d32; }
+.neutral { background-color: #fffde7; color: #f9a825; }
+.negative { background-color: #ffebee; color: #c62828; }
+
+.insights .alert {
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+
+.insights i {
+  margin-right: 10px;
+}
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.header-content h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Search Bar */
+.search-bar .input-group {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.5rem 1rem;
+  width: 300px;
+  transition: width 0.3s ease;
+}
+
+.search-bar .input-group:focus-within {
+  width: 350px;
+}
+
+.search-bar input {
+  background: transparent;
+  border: none;
+  color: #1A202C;
+  font-size: 1rem;
+  outline: none;
+}
+
+.search-bar .btn-outline-secondary {
+  background: transparent;
+  border: none;
+  color: #6B7280;
+  transition: color 0.3s ease;
+}
+
+.search-bar .btn-outline-secondary:hover {
+  color: #1E3A8A;
+}
+
+/* Export Buttons */
+.export-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-primary, .btn-success {
+  border-radius: 50px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+  border: none;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+  border: none;
+}
+
+.btn-primary:hover, .btn-success:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Tabs */
+.admin-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 8px 32px rgba(30, 58, 138, 0.1);
+}
+
+.admin-tabs button {
+  flex: 1;
+  min-width: 160px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(209, 213, 219, 0.4);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1A202C;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-tabs button.active {
+  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(30, 58, 138, 0.3);
+}
+
+.admin-tabs button:hover {
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Main Content */
+.main-content {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(30, 58, 138, 0.1);
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Tables */
+.table-responsive {
+  border-radius: 16px;
+  overflow: hidden;
+  animation: slideUp 0.5s ease-out;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table th {
+  background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+  color: white;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: left;
+  border-bottom: none;
+}
+
+.table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(209, 213, 219, 0.2);
+  font-size: 0.95rem;
+}
+
+.table tr:hover td {
+  background: rgba(59, 130, 246, 0.05);
+  transition: background 0.3s ease;
+}
+
+/* Badges */
+.badge {
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.badge-success {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10B981;
+}
+
+.badge-danger {
+  background: rgba(239, 68, 68, 0.2);
+  color: #EF4444;
+}
+
+.badge-warning {
+  background: rgba(245, 158, 11, 0.2);
+  color: #F59E0B;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.btn-action {
+  padding: 0.5rem;
+  min-width: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-action.edit {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3B82F6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.btn-action.ban {
+  background: rgba(245, 158, 11, 0.1);
+  color: #F59E0B;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.btn-action.delete {
+  background: rgba(239, 68, 68, 0.1);
+  color: #EF4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.btn-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Loading Message */
+.loading-message {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #6B7280;
+  box-shadow: 0 8px 32px rgba(30, 58, 138, 0.1);
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* No Data Message */
+.no-data {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #6B7280;
+  box-shadow: 0 8px 32px rgba(30, 58, 138, 0.1);
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Paginator */
+mat-paginator {
+  background: transparent;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: #1A202C;
+}
+
+mat-paginator .mat-paginator-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 0.5rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .dashboard-wrapper {
+    padding: 1.5rem;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-bar .input-group {
+    width: 100%;
+  }
+
+  .search-bar .input-group:focus-within {
+    width: 100%;
+  }
+
+  .admin-tabs {
+    flex-direction: column;
+  }
+
+  .admin-tabs button {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-wrapper {
+    padding: 1rem;
+  }
+
+  .header-content h1 {
+    font-size: 1.75rem;
+  }
+
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .export-buttons {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .table th, .table td {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+}
