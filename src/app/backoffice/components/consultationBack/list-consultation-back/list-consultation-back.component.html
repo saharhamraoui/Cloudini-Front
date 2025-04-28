@@ -1,0 +1,49 @@
+<div class="consultation-container">
+  <!-- Titre avec style moderne -->
+  <div class="header-section">
+    <h2 class="page-title">Liste des Consultations</h2>
+    <div class="divider"></div>
+  </div>
+
+  <!-- Tableau moderne -->
+  <div class="modern-table-container">
+    <table class="modern-table">
+      <thead>
+        <tr>
+         
+          <th>Date</th>
+          <th>Rapport</th>
+          <th>Rendez-vous</th>
+          <th>Diagnostic</th>
+          <th class="actions-header">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let consultation of listConsultation">
+          <td data-label="Date">{{ consultation.dateConsultation | date:'dd MMM yyyy HH:mm' }}</td>
+          <td data-label="Rapport" class="report-cell">
+            {{ consultation.rapport ? (consultation.rapport.length > 50 ? (consultation.rapport | slice:0:50) + '...' : consultation.rapport) : '' }}
+          </td>
+          <td data-label="Rendez-vous">
+            <span class="appointment-badge" [class.no-appointment]="!consultation.rendezVous">
+              {{ consultation.rendezVous ? (consultation.rendezVous.dateRendezVous | date:'short') : 'Non défini' }}
+            </span>
+          </td>
+          <td data-label="Diagnostic">
+            <span class="diagnosis-tag">{{ consultation.medicalRecord?.diagnosis || 'Non défini' }}</span>
+          </td>
+          <td class="actions-cell">
+            <div class="action-buttons">
+              <button class="edit-btn" (click)="modifierConsultation(consultation.idConsultation)">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="delete-btn" (click)="supprimerConsultation(consultation.idConsultation)">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
