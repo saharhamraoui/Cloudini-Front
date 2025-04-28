@@ -1,0 +1,75 @@
+<div class="consultation-form-container">
+  <!-- Titre avec style moderne -->
+  <div class="form-header">
+    <h1 class="form-title">Ajouter un Rendez-vous</h1>
+    <div class="title-divider"></div>
+  </div>
+
+  <!-- Carte de formulaire moderne -->
+  <div class="form-card">
+    <form [formGroup]="rendezVousForm" (ngSubmit)="ajouter()">
+      <!-- Sélection du médecin -->
+      <div class="form-field">
+        <label for="medecin" class="field-label">
+          <i class="fas fa-user-md"></i> Médecin <span class="required-asterisk">*</span>
+        </label>
+        <select id="medecin" 
+                formControlName="medecin" 
+                class="form-input"
+                [ngClass]="{'input-error': rendezVousForm.get('medecin')?.invalid && rendezVousForm.get('medecin')?.touched}">
+          <option value="">Sélectionnez un médecin</option>
+          <option *ngFor="let medecin of medecins" [value]="medecin.idUser">
+            {{ medecin.firstName }} {{ medecin.lastName }}
+          </option>
+        </select>
+        <div class="error-message" 
+             *ngIf="rendezVousForm.get('medecin')?.invalid && rendezVousForm.get('medecin')?.touched">
+          <i class="fas fa-exclamation-circle"></i> Sélection requise
+        </div>
+      </div>
+
+      <!-- Sélection du patient -->
+      <div class="form-field">
+        <label for="patient" class="field-label">
+          <i class="fas fa-user-injured"></i> Patient <span class="required-asterisk">*</span>
+        </label>
+        <select id="patient" 
+                formControlName="patient" 
+                class="form-input"
+                [ngClass]="{'input-error': rendezVousForm.get('patient')?.invalid && rendezVousForm.get('patient')?.touched}">
+          <option value="">Sélectionnez un patient</option>
+          <option *ngFor="let patient of patients" [value]="patient.idUser">
+            {{ patient.firstName }} {{ patient.lastName }}
+          </option>
+        </select>
+        <div class="error-message" 
+             *ngIf="rendezVousForm.get('patient')?.invalid && rendezVousForm.get('patient')?.touched">
+          <i class="fas fa-exclamation-circle"></i> Sélection requise
+        </div>
+      </div>
+
+      <!-- Champ pour la date du rendez-vous -->
+      <div class="form-field">
+        <label for="dateRendezVous" class="field-label">
+          <i class="far fa-calendar-alt"></i> Date du Rendez-vous <span class="required-asterisk">*</span>
+        </label>
+        <input type="datetime-local" 
+               id="dateRendezVous" 
+               formControlName="dateRendezVous" 
+               class="form-input"
+               [ngClass]="{'input-error': rendezVousForm.get('dateRendezVous')?.invalid && rendezVousForm.get('dateRendezVous')?.touched}">
+        <div class="error-message" 
+             *ngIf="rendezVousForm.get('dateRendezVous')?.invalid && rendezVousForm.get('dateRendezVous')?.touched">
+          <i class="fas fa-exclamation-circle"></i> Ce champ est requis
+        </div>
+      </div>
+
+      <!-- Bouton de soumission -->
+      <button type="submit" 
+              class="submit-btn-thead"
+              [disabled]="rendezVousForm.invalid">
+        <i class="fas fa-calendar-plus"></i> Ajouter le Rendez-vous
+      </button>
+    </form>
+  </div>
+</div>
