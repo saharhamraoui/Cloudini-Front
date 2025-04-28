@@ -1,0 +1,29 @@
+<app-header-front></app-header-front>
+
+<!-- Optional: Frontoffice Top Navigation -->
+<div class="backoffice-container">
+  <nav class="navbar navbar-light bg-light px-3">
+    <span class="navbar-brand mb-0 h4">👤 Espace Utilisateur</span>
+    <div>
+      <a routerLink="/reclamation" class="btn btn-primary me-2">➕ Soumettre une réclamation</a>
+      <a routerLink="/my-reclamations" class="btn btn-outline-primary">📄 Mes réclamations</a>
+    </div>
+  </nav>
+
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<app-footer-front></app-footer-front>
+
+
+
+
+<!-- Scroll Top Button -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+  <i class="bi bi-arrow-up-short"></i>
+</a>
+
+<!-- Preloader -->
+<div id="preloader"></div>

@@ -1,0 +1,32 @@
+<aside class="sidebar">
+  <div class="image-container"></div>
+  <nav class="menu">
+    <div class="avatar-container">
+      <div class="avatar-circle">{{ getAvatarInitials() }}</div>
+      <div class="user-name">{{ currentUser.firstName }} {{ currentUser.lastName }}</div>
+    </div>
+
+    <ul>
+      <li><a [routerLink]="['/back/doctordashboard']"><i class="fas fa-sliders-h"></i><span> Dashboard</span></a></li>
+      <li><a [routerLink]="['/editdoctorprofile']"><i class="fas fa-user-circle"></i><span> Profile</span></a></li>
+      <li><a [routerLink]="['/back/approvalstatus']"><i class="fa fa-check"></i><label> Statut d'approbation</label></a></li>
+      <li><a [routerLink]="['/back/list-rendez-vous-back']"><i class="fa fa-calendar"></i><label> List des Rendez-vous</label></a></li>
+      <li><a [routerLink]="['/back/list-consultation-Back']"><i class="fa fa-calendar"></i><label> List des Consultation</label></a></li>
+      <li><a [routerLink]="['/back/ajouterassistant']"><i class="fa fa-user-md"></i><label> Liste des assistants</label></a></li>
+      <li><a [routerLink]="['/stock']"><i class="fa fa-plus"></i><label> Liste des produits</label></a></li>
+      <li><a [routerLink]="['/commande']"><i class="fa fa-sticky-note"></i><label> Liste des commandes</label></a></li>
+      <li><a [routerLink]="['/doctorlist']"><i class="fa fa-user-md"></i><label> Liste des médecins</label></a></li>
+      <li><a [routerLink]="['/patientlist']"><i class="fa fa-user"></i><label> Patients</label></a></li>
+      <li><a [routerLink]="['/paiements']"><i class="fa fa-credit-card"></i><label> Paiements</label></a></li>
+      <li><a [routerLink]="['/addprescription']"><i class="fa fa-paper-plane"></i><label> Ajouter des ordonnances</label></a></li>
+      <li><a [routerLink]="['/prescriptions']"><i class="fa fa-list"></i><label> List des ordonnances</label></a></li>
+      <li><a [routerLink]="['/consulter-conges']"><i class="fa fa-sticky-note-o"></i><label> List des congés</label></a></li>
+
+      <!-- ✅ Reclamation Features -->
+      <li><a [routerLink]="['/back/reclamations']"><i class="fa fa-comments"></i><label> Gérer les réclamations</label></a></li>
+      <li><a [routerLink]="['/back/metrics']"><i class="fa fa-bar-chart"></i><label> Statistiques des réclamations</label></a></li>
+
+      <li><a [routerLink]="['/']"><i class="fas fa-sign-out-alt"></i><label> Log out</label></a></li>
+    </ul>
+  </nav>
+</aside>
