@@ -1,0 +1,28 @@
+<div class="face-registration-container">
+    <h2>Register Your Face</h2>
+    
+    <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+    
+    <div *ngIf="registrationSuccess" class="alert alert-success">
+      Face registered successfully!
+      <button class="btn btn-link" (click)="navigateToHome()">Go to Home</button>
+    </div>
+  
+    <div class="video-container">
+      <video #videoElement width="640" height="480" autoplay muted></video>
+      <canvas #canvasElement width="640" height="480" style="display: none;"></canvas>
+    </div>
+  
+    <div class="actions mt-3">
+      <button 
+        class="btn btn-primary"
+        (click)="registerFace()"
+        [disabled]="isRegistering">
+        <span *ngIf="!isRegistering">Register Face</span>
+        <span *ngIf="isRegistering">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Processing...
+        </span>
+      </button>
+    </div>
+  </div>

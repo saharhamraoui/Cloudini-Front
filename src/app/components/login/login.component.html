@@ -1,0 +1,139 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="login-form mt-5">
+      <h2 class="text-center mb-4">Login</h2>
+      
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mb-4">
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+        
+        <!-- Email Field -->
+        <div class="form-group mb-3">
+          <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+          <input type="email" class="form-control" id="email" formControlName="email"
+                 placeholder="Enter your email"
+                 [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="invalid-feedback">
+            <div *ngIf="loginForm.get('email')?.errors?.['required']">This field is required</div>
+            <div *ngIf="loginForm.get('email')?.errors?.['email']">Please enter a valid email</div>
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group mb-3">
+          <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+          <input type="password" class="form-control" id="password" formControlName="password"
+                 placeholder="Enter your password"
+                 [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="invalid-feedback">
+            <div *ngIf="loginForm.get('password')?.errors?.['required']">This field is required</div>
+          </div>
+          <small class="form-text text-muted">At least one uppercase letter, one digit, one lowercase letter, one special character, length 6-20</small>
+        </div>
+
+        <!-- reCAPTCHA -->
+        <div class="form-group mb-3">
+          <re-captcha 
+            (resolved)="onCaptchaResolved($event)"
+            [siteKey]="'6Ld-Xh0rAAAAAJqqNwbp7PeKvIT8FmNJLxjrKhy9'"
+            [ngClass]="{'is-invalid': !captchaResponse && loginForm.touched}">
+          </re-captcha>
+          <div *ngIf="!captchaResponse && loginForm.touched" class="invalid-feedback d-block">
+            Please complete the reCAPTCHA
+          </div>
+        </div>
+
+        <!-- Options -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="remember" name="remember">
+            <label class="form-check-label" for="remember">Remember me</label>
+          </div>
+          <a routerLink="/forgot-password" class="text-primary">Forgot password?</a>
+        </div>
+        
+        <!-- Login Button -->
+        <button type="submit" class="btn btn-primary w-100 py-2" 
+                [disabled]="loginForm.invalid || isLoading || !captchaResponse">
+          <span *ngIf="!isLoading">Login</span>
+          <span *ngIf="isLoading">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Logging in...
+          </span>
+        </button>
+      </form>
+      
+      <!-- Separator -->
+      <div class="position-relative text-center my-4">
+        <hr>
+        <span class="position-absolute top-50 translate-middle-y bg-white px-3">OR</span>
+      </div>
+      
+      <!-- Google Sign-In -->
+      <asl-google-signin-button></asl-google-signin-button>
+      <div id="g_id_onload"
+           data-client_id="549477820375-9rt1vpu7eauf1m6v42mfdf899umiq3ls.apps.googleusercontent.com"
+           data-use_fedcm_for_prompt="true"
+           data-use_fedcm_for_button="true">
+      </div>
+      
+      <div class="g_id_signin"
+           data-type="standard"
+           data-size="large"
+           data-theme="outline"
+           data-text="sign_in_with"
+           data-shape="rectangular"
+           data-callback="handleCredentialResponse">
+      </div>
+      <!-- Role Selection Modal -->
+<div class="modal fade" id="roleSelectionModal" tabindex="-1" *ngIf="showRoleSelectionModal" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Select Your Role</h5>
+      </div>
+      <div class="modal-body">
+        <p>Please select your role to continue:</p>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="role" id="patientRole" value="patient" [(ngModel)]="selectedRole">
+          <label class="form-check-label" for="patientRole">Patient</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="role" id="medecinRole" value="medecin" [(ngModel)]="selectedRole">
+          <label class="form-check-label" for="medecinRole">Medecin</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="role" id="chauffeurRole" value="chauffeur" [(ngModel)]="selectedRole">
+          <label class="form-check-label" for="chauffeurRole">Chauffeur</label>
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="confirmRoleSelection()" [disabled]="googleLoading">
+          {{ googleLoading ? 'Registering...' : 'Confirm' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+      
+      <!-- Separator -->
+      <div class="position-relative text-center my-4">
+        <hr>
+        <span class="position-absolute top-50 translate-middle-y bg-white px-3">OR</span>
+      </div>
+
+      <!-- Face Recognition Login -->
+      <button class="btn btn-outline-primary w-100 mb-3" (click)="navigateToFaceLogin()">
+        <i class="fas fa-user-circle me-2"></i>
+        Login with Face Recognition
+      </button>
+      
+      <!-- Sign-Up Link -->
+      <div class="text-center">
+        Don't have an account? 
+        <a routerLink="/role-selection" class="text-primary fw-bold">Create an account</a>
+      </div>
+    </div>
+  </div>
+</div>

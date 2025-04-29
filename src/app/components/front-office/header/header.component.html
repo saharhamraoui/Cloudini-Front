@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="assets/logo.png" alt="Hospital Management" style="height: 40px;" />
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">
+            <i class="fas fa-home"></i> Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about" routerLinkActive="active">
+            <i class="fas fa-info-circle"></i> About Us
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/appointments" routerLinkActive="active">
+            <i class="fas fa-calendar-alt"></i> Book Appointment
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active">
+            <i class="fas fa-phone-alt"></i> Contact
+          </a>
+        </li>
+
+        <!-- Si utilisateur n'est pas connecté -->
+        <ng-container *ngIf="!isLoggedIn">
+          <li class="nav-item ms-3">
+            <a class="btn btn-outline-dark" routerLink="/login">
+              <i class="fas fa-sign-in-alt"></i> Sign In
+            </a>
+          </li>
+          <li class="nav-item ms-2">
+            <a class="btn btn-primary" routerLink="/role-selection">
+              <i class="fas fa-user-plus"></i> Sign Up
+            </a>
+          </li>
+        </ng-container>
+
+        <!-- Si utilisateur est connecté -->
+        <div *ngIf="isLoggedIn" class="d-flex align-items-center">
+          <img [src]="userPhoto" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+          <span class="navbar-text me-3">{{userName}}</span>
+          <button class="btn btn-outline-danger btn-sm" (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i> Déconnexion
+          </button>
+        </div>
+        <ng-container *ngIf="isLoggedIn">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user-circle"></i> {{ userName }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/profile"><i class="fas fa-user me-2"></i> Edit Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+            </ul>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</nav>

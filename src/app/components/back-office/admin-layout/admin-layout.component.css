@@ -1,0 +1,108 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  height: 100%; /* Ensure it stretches to content height if taller than viewport */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(145deg, #E6F0FA 0%, #F7FAFC 100%);
+  position: relative; /* Provide positioning context for absolute children */
+  transition: background 0.3s ease;
+  margin: 0; /* Remove any default margins */
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.admin-layout.dark-mode {
+  background: linear-gradient(145deg, #1F2937 0%, #374151 100%);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 280px;
+  width: calc(100% - 280px);
+  min-height: 100vh; /* Ensure main-content also stretches */
+  transition: margin-left 0.3s ease, width 0.3s ease, margin-right 0.3s ease;
+}
+
+.sidebar-collapsed .main-content {
+  margin-left: 80px;
+  width: calc(100% - 80px);
+}
+
+.content-wrapper {
+  padding: 2rem;
+  flex: 1;
+  animation: fadeIn 0.5s ease-out;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s ease;
+}
+
+.dark-mode .content-wrapper {
+  background: rgba(55, 65, 81, 0.9);
+  color: #D1D5DB;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Minimize dashboard when tasks panel is visible */
+.tasks-visible .main-content {
+  width: calc(100% - 400px - 280px);
+  margin-right: 400px;
+}
+
+.tasks-visible.sidebar-collapsed .main-content {
+  width: calc(100% - 400px - 80px);
+  margin-right: 400px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .main-content {
+    margin-left: 200px;
+    width: calc(100% - 200px);
+  }
+
+  .sidebar-collapsed .main-content {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+  }
+
+  .tasks-visible .main-content {
+    width: calc(100% - 300px - 200px);
+    margin-right: 300px;
+  }
+
+  .tasks-visible.sidebar-collapsed .main-content {
+    width: calc(100% - 300px - 60px);
+    margin-right: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: 1rem;
+  }
+
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .sidebar-collapsed .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .tasks-visible .main-content {
+    width: 100%;
+    margin-right: 0;
+  }
+}

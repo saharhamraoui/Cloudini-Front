@@ -1,0 +1,31 @@
+<div class="face-login-container">
+    <h2>Login with Face Recognition</h2>
+    
+    <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+    
+    <div *ngIf="recognizedUser" class="alert alert-success">
+      Recognized user: {{recognizedUser.label}}
+    </div>
+  
+    <div class="video-container">
+      <video #videoElement width="640" height="480" autoplay muted></video>
+      <canvas #canvasElement width="640" height="480" style="display: none;"></canvas>
+    </div>
+  
+    <div class="actions mt-3">
+      <button 
+        class="btn btn-primary"
+        (click)="loginWithFace()"
+        [disabled]="isLoggingIn">
+        <span *ngIf="!isLoggingIn">Login with Face</span>
+        <span *ngIf="isLoggingIn">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Recognizing...
+        </span>
+      </button>
+      
+      <button class="btn btn-link" (click)="navigateToLogin()">
+        Use email/password instead
+      </button>
+    </div>
+  </div>
