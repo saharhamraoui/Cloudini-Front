@@ -1,0 +1,81 @@
+<aside class="sidebar">
+    <div class="image-container">
+      <!-- Optional: <img src="assets/backoffice/sidebar-image.png" class="sidebar-image"> -->
+    </div>
+    <nav class="menu">
+      <!-- Avatar Section -->
+      <div class="avatar-container">
+        <div class="avatar-circle">
+          {{ getAvatarInitials() }}
+        </div>
+        <div class="user-name">
+          {{ currentUser.firstName }} {{ currentUser.lastName }}
+        </div>
+      </div>
+  
+      <ul>
+        <li>
+          <a [routerLink]="['/back/DashboardStock']" routerLinkActive="active">
+            <i class="fas fa-sliders-h icon-spaced"></i>
+            <span>Stock Dashboard</span>
+          </a>
+        </li>
+    
+        <li>
+          <a [routerLink]="['/back/editdoctorprofile']" routerLinkActive="active">
+            <i class="fas fa-user-circle icon-spaced"></i>
+            <span>Profile</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/back/crudmed']" routerLinkActive="active">
+            <i class="fa fa-pills icon-spaced"></i>
+            <label>Medications</label>
+          </a>
+        </li>
+  
+        <li>
+          <a [routerLink]="['/back/stock']" routerLinkActive="active">
+            <i class="fa fa-boxes icon-spaced"></i>
+            <label>Stock</label>
+          </a>
+        </li>
+  
+        <li>
+          <a [routerLink]="['/back/commandes']" routerLinkActive="active">
+            <i class="fa fa-file-invoice icon-spaced"></i>
+            <label>Orders</label>
+          </a>
+        </li>
+  
+        <li>
+          <a [routerLink]="['/back/verifcommandes']" routerLinkActive="active">
+            <i class="fa fa-tasks icon-spaced"></i>
+            <label>Orders Confirmation</label>
+          </a>
+        </li>
+  
+        <li>
+          <a [routerLink]="['/back/fournisseur']" routerLinkActive="active">
+            <i class="fa fa-truck icon-spaced"></i>
+            <label>Providers List</label>
+          </a>
+        </li>
+  
+        <li>
+          <a [routerLink]="['/back/crudfournisseur']" routerLinkActive="active">
+            <i class="fa fa-industry icon-spaced"></i>
+            <label>Providers</label>
+          </a>
+        </li>
+
+        <li>
+          <a [routerLink]="['/back/logout']" routerLinkActive="active">
+            <i class="fas fa-sign-out-alt icon-spaced"></i>
+            <label>Log out</label>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  
