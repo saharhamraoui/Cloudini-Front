@@ -367,7 +367,6 @@ newPayment: Paiement = {
 initiateNewPayment(): void {
   this.loadPatientsAndDoctors();
   this.showAddPaymentModal = true;
-
 }
 
 loadPatientsAndDoctors(): void {

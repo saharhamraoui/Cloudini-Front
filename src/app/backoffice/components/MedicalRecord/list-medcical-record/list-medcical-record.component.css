@@ -870,9 +870,7 @@
   margin: 10px 0;
 }
 
-.file-input {
-  display: none;
-}
+
 
 .btn-upload {
   background-color: #0e5551;
@@ -1025,10 +1023,6 @@
 
 .btn-browse:hover {
   background: #0d4a46;
-}
-
-.file-input {
-  display: none;
 }
 
 .supported-formats {
@@ -1539,7 +1533,12 @@
 }
 
 .file-input {
-  display: none;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
 .supported-formats {

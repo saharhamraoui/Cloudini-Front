@@ -47,9 +47,9 @@
                 <i class="fas fa-cloud-upload-alt"></i>
                 <p>Drag & drop your file here</p>
                 <span class="or-text">or</span>
-                <label class="btn-browse">
+                <label for="file-upload" class="btn-browse">
                   Browse Files
-                  <input type="file" (change)="onFileSelected($event)" accept=".json,.txt" class="file-input">
+                  <input id="file-upload" type="file" (change)="onFileSelected($event)" accept=".json,.txt" class="file-input">
                 </label>
               </div>
               <div class="supported-formats">
