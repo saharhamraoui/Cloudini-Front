@@ -7,7 +7,13 @@ export class RendezVous {
     dateRendezVous!: Date;
     medecin: { idUser: number };  // Accepte seulement l'ID
     patient: { idUser: number }; // Lien vers un patient
+<<<<<<< HEAD
     status?: string; 
+=======
+    status?: string;
+
+    typeRendezVous?: string;
+>>>>>>> blogfront
    // consultation!: Consultation; // Lien vers une consultation
 
    constructor(dateRendezVous: Date, medecin: Medecin, patient: Patient) {

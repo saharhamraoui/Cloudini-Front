@@ -1,3 +1,5 @@
+
+import { RendezVous } from './../../../../model/RendezVous';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,7 +14,7 @@ import { ConsultationService } from 'src/app/services/consultation.service';
 export class ListConsultationBackComponent {
 title = 'projectPi';
   listConsultation: any=[] ;
-
+  selectedQRCodeRecordId: number | null = null;
 
 
   constructor(private consultationService:ConsultationService ,private router:Router){}
@@ -28,7 +30,8 @@ title = 'projectPi';
         this.listConsultation=donnes;
       },
       (erreur:HttpErrorResponse)=>{
-        console.log('Erreur de l\'API :',erreur); 
+
+        console.log('Erreur de l\'API :',erreur);
       }
 
     );
@@ -42,7 +45,6 @@ title = 'projectPi';
           console.log(data)
           console.log("deleted")
           this.listConsultation = this.listConsultation.filter((consultation: Consultation) => consultation.idConsultation !== id);
-  
         },
         error=>{
           console.log(error)
@@ -55,6 +57,47 @@ title = 'projectPi';
       id=Number(id)
       this.router.navigate(['/back/updateConsultationBack',id])
     }
-  
-  
-}
+
+    toggleQRCode(recordId: number | undefined): void {
+      if (this.selectedQRCodeRecordId === recordId) {
+        this.selectedQRCodeRecordId = null;
+      } else {
+        this.selectedQRCodeRecordId = recordId ?? null;
+      }
+    }
+
+    getQRCodeData(record: Consultation): string {
+      const notes = record.medicalRecord?.notes
+        ? record.medicalRecord.notes.substring(0, 100) + '...'
+        : 'Aucune note';
+
+      const diagnosis = record.medicalRecord?.diagnosis || 'N/A';
+
+      const createdAt = record.medicalRecord?.createdAt
+        ? new Date(record.medicalRecord.createdAt).toLocaleDateString()
+        : 'N/A';
+
+      const RendezVousDate = record.rendezVous.dateRendezVous
+        ? new Date(record.rendezVous.dateRendezVous).toLocaleDateString()
+        : 'N/A';
+
+      return `--- DOSSIER MÉDICAL ---
+    ID Consultation: ${record.idConsultation ?? 'N/A'}
+    Date Consultation: ${RendezVousDate}
+
+    Date Création Dossier: ${createdAt}
+    Diagnostic: ${diagnosis}
+    Notes: ${notes}`;
+    }
+
+
+
+
+
+  }
+
+
+
+
+
+

@@ -1,7 +1,7 @@
 <div class="consultation-form-container">
   <!-- Titre avec style moderne -->
   <div class="form-header">
-    <h1 class="form-title">Ajouter un Rendez-vous</h1>
+   <h1 class="form-title">Add Appointment</h1>
     <div class="title-divider"></div>
   </div>
 
@@ -11,20 +11,24 @@
       <!-- Sélection du médecin -->
       <div class="form-field">
         <label for="medecin" class="field-label">
-          <i class="fas fa-user-md"></i> Médecin <span class="required-asterisk">*</span>
+
+
+          <i class="fas fa-user-md"></i> Doctor <span class="required-asterisk">*</span>
         </label>
-        <select id="medecin" 
-                formControlName="medecin" 
+        <select id="medecin"
+                formControlName="medecin"
                 class="form-input"
                 [ngClass]="{'input-error': rendezVousForm.get('medecin')?.invalid && rendezVousForm.get('medecin')?.touched}">
-          <option value="">Sélectionnez un médecin</option>
+
+          <option value="">Select a doctor</option>
           <option *ngFor="let medecin of medecins" [value]="medecin.idUser">
             {{ medecin.firstName }} {{ medecin.lastName }}
           </option>
         </select>
-        <div class="error-message" 
+        <div class="error-message"
              *ngIf="rendezVousForm.get('medecin')?.invalid && rendezVousForm.get('medecin')?.touched">
-          <i class="fas fa-exclamation-circle"></i> Sélection requise
+
+          <i class="fas fa-exclamation-circle"></i> Doctor is required.
         </div>
       </div>
 
@@ -33,42 +37,47 @@
         <label for="patient" class="field-label">
           <i class="fas fa-user-injured"></i> Patient <span class="required-asterisk">*</span>
         </label>
-        <select id="patient" 
-                formControlName="patient" 
+        <select id="patient"
+                formControlName="patient"
                 class="form-input"
                 [ngClass]="{'input-error': rendezVousForm.get('patient')?.invalid && rendezVousForm.get('patient')?.touched}">
-          <option value="">Sélectionnez un patient</option>
+
+          <option value="">Select a patient</option>
           <option *ngFor="let patient of patients" [value]="patient.idUser">
             {{ patient.firstName }} {{ patient.lastName }}
           </option>
         </select>
-        <div class="error-message" 
+        <div class="error-message"
              *ngIf="rendezVousForm.get('patient')?.invalid && rendezVousForm.get('patient')?.touched">
-          <i class="fas fa-exclamation-circle"></i> Sélection requise
+
+          <i class="fas fa-exclamation-circle"></i> Patient is required.
         </div>
       </div>
 
       <!-- Champ pour la date du rendez-vous -->
       <div class="form-field">
         <label for="dateRendezVous" class="field-label">
-          <i class="far fa-calendar-alt"></i> Date du Rendez-vous <span class="required-asterisk">*</span>
+
+          <i class="far fa-calendar-alt"></i> Date of Appointment <span class="required-asterisk">*</span>
         </label>
-        <input type="datetime-local" 
-               id="dateRendezVous" 
-               formControlName="dateRendezVous" 
+        <input type="datetime-local"
+               id="dateRendezVous"
+               formControlName="dateRendezVous"
                class="form-input"
                [ngClass]="{'input-error': rendezVousForm.get('dateRendezVous')?.invalid && rendezVousForm.get('dateRendezVous')?.touched}">
-        <div class="error-message" 
+        <div class="error-message"
              *ngIf="rendezVousForm.get('dateRendezVous')?.invalid && rendezVousForm.get('dateRendezVous')?.touched">
-          <i class="fas fa-exclamation-circle"></i> Ce champ est requis
+
+          <i class="fas fa-exclamation-circle"></i> Date is required.
         </div>
       </div>
 
       <!-- Bouton de soumission -->
-      <button type="submit" 
+      <button type="submit"
               class="submit-btn-thead"
               [disabled]="rendezVousForm.invalid">
-        <i class="fas fa-calendar-plus"></i> Ajouter le Rendez-vous
+
+        <i class="fas fa-calendar-plus"></i> Add Appointment
       </button>
     </form>
   </div>

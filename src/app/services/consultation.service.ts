@@ -17,21 +17,23 @@ export class ConsultationService {
     constructor(private http: HttpClient) { }
     public getConsultation(): Observable<Consultation[]>{
        
-        return this.http.get<Consultation[]>(this.urlServeurApi+"/pidb/consultation/GetAll");
+
+        return this.http.get<Consultation[]>(this.urlServeurApi+"/consultation/GetAll");
       }
 
         public getRendezVous(): Observable<RendezVous[]> {
-          return this.http.get<RendezVous[]>(this.urlServeurApi+"/pidb/consultation/getAllRendezVous");
+          return this.http.get<RendezVous[]>(this.urlServeurApi+"/consultation/getAllRendezVous");
         }
       
         public getMedicalRecords(): Observable<MedicalRecord[]> {
-          return this.http.get<MedicalRecord[]>(this.urlServeurApi+"/pidb/consultation/getAllMedicalRecord");
+          return this.http.get<MedicalRecord[]>(this.urlServeurApi+"/consultation/getAllMedicalRecord");
         }
       
         addConsultation(consultation:Consultation) {
          
           return this.http.post<Consultation>(
-            `${this.urlServeurApi}/pidb/consultation/addConsultation`,
+
+            `${this.urlServeurApi}/consultation/addConsultation`,
             consultation,
             { headers: { 'Content-Type': 'application/json' } }
         );
@@ -39,16 +41,18 @@ export class ConsultationService {
 
         deleteConsultation(id:number) :Observable<Consultation> {
    
-          return this.http.delete<Consultation>(`${this.urlServeurApi}/pidb/consultation/deleteConsultation/${id}`);
+
+          return this.http.delete<Consultation>(`${this.urlServeurApi}/consultation/deleteConsultation/${id}`);
        
          }
 
          updateConsultation(consultation: any): Observable<any> {
-          return this.http.put(`${this.urlServeurApi}/pidb/consultation/updateConsultation`, consultation);
+
+          return this.http.put(`${this.urlServeurApi}/consultation/updateConsultation`, consultation);
         }
 
         getConsultationById(id:number) :Observable<Consultation> {
-          return this.http.get<Consultation>(this.urlServeurApi+"/pidb/consultation/GetById/"+id);
+          return this.http.get<Consultation>(this.urlServeurApi+"/consultation/GetById/"+id);
           
         }
 }

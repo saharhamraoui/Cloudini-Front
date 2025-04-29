@@ -1,14 +1,9 @@
 <div class="backoffice-container">
-  <!-- Header at the top -->
-  <app-header-back></app-header-back>
-
-  <div class="main-content">
-    <!-- Sidebar on the left -->
-    <app-sidebar></app-sidebar>
-
-    <!-- Dynamic content area -->
-    <div class="content">
-      <router-outlet></router-outlet>
+    <app-header-back *ngIf="showLayout()"></app-header-back>
+    <div class="main-content">
+      <app-sidebar *ngIf="showLayout()"></app-sidebar>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
-</div>

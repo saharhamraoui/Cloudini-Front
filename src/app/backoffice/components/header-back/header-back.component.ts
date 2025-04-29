@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-back',
@@ -19,6 +20,11 @@ export class HeaderBackComponent implements OnInit {
       this.loggedUser = rawUser ? rawUser.replace(/"/g, '') : '';
     
       this.currRole = sessionStorage.getItem('ROLE') || '';
+      this.loggedUser = JSON.stringify(sessionStorage.getItem('loggedUser') || '{}');
+      this.loggedUser = this.loggedUser.replace(/"/g, '');
+    
+      this.currRole = sessionStorage.getItem('ROLE') || '';
+      console.log('Current Role:', this.currRole); // Affiche la valeur du rôle
     
       if (this.loggedUser === 'admin@gmail.com') {
         this.title = 'Admin Dashboard';
@@ -42,9 +48,5 @@ export class HeaderBackComponent implements OnInit {
     sessionStorage.clear();
     if (this.currRole == 'admin') this._router.navigate(['/login']);
     else this._router.navigate(['/login']), window.location.reload();
-;
   }
-
- 
-
 }

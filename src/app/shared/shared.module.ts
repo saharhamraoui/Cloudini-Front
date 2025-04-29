@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NlToBrPipe } from '../pipes/nl-to-br.pipe'; // ✅ Make sure the path is correct
+import { NlToBrPipe } from '../pipes/nl-to-br.pipe';
 
 @NgModule({
   declarations: [
@@ -13,4 +13,5 @@ import { NlToBrPipe } from '../pipes/nl-to-br.pipe'; // ✅ Make sure the path i
     NlToBrPipe
   ]
 })
-export class SharedModule { }
+
+export class SharedModule { } 

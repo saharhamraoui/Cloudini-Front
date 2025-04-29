@@ -58,9 +58,6 @@
 .modern-table tr:last-child td {
   border-bottom: none;
 }
-
-
-
 /* Style des cellules spécifiques */
 .report-cell {
   max-width: 200px;
@@ -99,35 +96,66 @@
 }
 
 .edit-btn, .delete-btn {
+  gap: 1rem;
+}
+
+.action-btn {
   border: none;
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s;
+  transition: 0.2s;
+  font-size: 20px;
 }
 
+/* Bouton d'édition */
 .edit-btn {
   background: #fff8e1;
   color: #ffa000;
 }
-
-.delete-btn {
-  background: #ffebee;
-  color: #d32f2f;
-}
-
 .edit-btn:hover {
   background: #ffa000;
   color: white;
 }
 
+
+/* Bouton de suppression */
+.delete-btn {
+  background: #ffebee;
+  color: #d32f2f;
+}
+
 .delete-btn:hover {
   background: #d32f2f;
   color: white;
+}
+
+/* Bouton QR Code */
+.qr-btn {
+  background-color: #ffffff;
+  color: #3498db; /* couleur verte pour le QR Code */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: 0.2s ease;
+}
+
+.qr-btn:hover {
+  background-color: #f0f0f0;
+  color: #2ecc71; /* Légère variation au survol */
+}
+
+.qr-btn i {
+  font-size: 20px; /* Ajuster la taille de l'icône */
+}
+
+.qr-btn:focus {
+  outline: none;
 }
 
 /* Responsive */

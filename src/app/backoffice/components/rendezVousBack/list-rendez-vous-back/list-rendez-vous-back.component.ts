@@ -11,6 +11,7 @@ import { RendezVousService } from 'src/app/services/rendez-vous.service';
 })
 export class ListRendezVousBackComponent {
 title = 'projectPi';
+
   rvs: any=[] ;
   rv: RendezVous[] = [];
 
@@ -107,6 +108,4 @@ changerStatus(rv: any) {
       console.warn("Rendez-vous non trouvé pour ID :", idRendezVous);
     }
   }
- 
-
 }
