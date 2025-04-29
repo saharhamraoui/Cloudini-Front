@@ -10,7 +10,7 @@ import { BilanService } from 'src/app/services/Bilan/bilan.service';
 export class BilanUploadComponent {
   bilanForm: FormGroup;
   selectedFile: File | null = null;
-
+  uploadSuccess: boolean=false;
   @Input() medicalRecordId?: number | null;
   @Output() bilanUploaded = new EventEmitter<void>(); // Add this line
 
@@ -31,7 +31,7 @@ export class BilanUploadComponent {
       alert('Please select a file.');
       return;
     }
-
+    this.uploadSuccess=true;
     const formData = new FormData();
     formData.append('type', this.bilanForm.get('type')?.value);
     formData.append('results', this.bilanForm.get('results')?.value);

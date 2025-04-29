@@ -213,4 +213,44 @@ export class PrescriptionFrontComponent implements OnInit {
   get totalPages(): number {
     return Math.ceil(this.filteredPrescriptions.length / this.itemsPerPage);
   }
+
+  //add modal functions 
+  // Add these properties
+showAddPrescriptionModal: boolean = false;
+newPrescription: Prescription = {
+  medication: '',
+  dosage: '',
+  instructions: '',
+  issueDate: new Date().toISOString().split('T')[0],
+  status: PrescriptionStatus.ACTIVE
+};
+
+// Add these methods
+openAddPrescriptionModal(): void {
+  this.showAddPrescriptionModal = true;
+}
+
+closeAddPrescriptionModal(): void {
+  this.showAddPrescriptionModal = false;
+  this.newPrescription = {
+    medication: '',
+    dosage: '',
+    instructions: '',
+    issueDate: new Date().toISOString().split('T')[0],
+    status: PrescriptionStatus.ACTIVE
+  };
+}
+
+onSubmitPrescription(): void {
+  this.prescriptionService.addPrescriptions(this.newPrescription).subscribe({
+    next: (response) => {
+      // Handle success
+      this.closeAddPrescriptionModal();
+      this.loadPrescriptions(); // Refresh your prescription list
+    },
+    error: (err) => {
+      console.error('Error adding prescription:', err);
+    }
+  });
+}
 }

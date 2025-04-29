@@ -6,6 +6,7 @@ import { Paiement } from 'src/app/model/Paiement';
 import { PaymentStatus } from 'src/app/model/PaymentStatus';
 import { KonnectPaymentService } from 'src/app/services/Konnect/konnect-payment.service';
 import { PaiementService } from 'src/app/services/Paiement/paiement.service';
+import { UserServiceService } from 'src/app/services/UserTest/user-service.service';
 
 interface PaymentNavigationState {
   refreshPayments?: boolean;
@@ -56,10 +57,19 @@ export class PaymentListComponent implements OnInit {
     { id: 5, name: 'Jones', specialty: 'Orthopedics', avatarColor: '#F44336' }
   ];
 
+  patients = [
+    { id: 1, name: 'Smith', specialty: 'Cardiology', avatarColor: '#4CAF50' },
+    { id: 2, name: 'Johnson', specialty: 'Dermatology', avatarColor: '#2196F3' },
+    { id: 3, name: 'Williams', specialty: 'Pediatrics', avatarColor: '#FF9800' },
+    { id: 4, name: 'Brown', specialty: 'Neurology', avatarColor: '#9C27B0' },
+    { id: 5, name: 'Jones', specialty: 'Orthopedics', avatarColor: '#F44336' }
+  ];
+
+
 
   
 
-  constructor(private paymentService: PaiementService, private router: Router,private konnectPaymentService:KonnectPaymentService) {}
+  constructor(private paymentService: PaiementService, private router: Router,private konnectPaymentService:KonnectPaymentService,userService:UserServiceService) {}
 
   ngOnInit(): void {
     this.checkForRefresh();
@@ -285,9 +295,7 @@ stopReading(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  initiateNewPayment(): void {
-    this.router.navigate(['/front/PaiementClient']);
-  }
+ 
 
   initiatePayment(payment: Paiement): void {
     const paymentData = {
@@ -338,4 +346,78 @@ stopReading(): void {
     this.router.navigate(['/front/request-discount',id]);
   }
   
+
+  //add payment 
+  // Add these properties to your component class
+showAddPaymentModal: boolean = false;
+//patients: any[] = [];
+// doctors: any[] = [];
+
+newPayment: Paiement = {
+  nomPatient: '',
+  montant: 0,
+  modeDePaiement: 'Carte Bancaire',
+  datePaiement: new Date().toISOString().split('T')[0], // Today's date in YYYY-MM-DD
+  statut: PaymentStatus.Unpaid,
+  emailMedecin: '',
+  emailPatient: ''
+};
+
+// Add these methods to your component class
+initiateNewPayment(): void {
+  this.loadPatientsAndDoctors();
+  this.showAddPaymentModal = true;
+
+}
+
+loadPatientsAndDoctors(): void {
+  /* this.userService.getPatients().subscribe(patients => {
+    this.patients = patients;
+  });
+  
+ this.userService.getMedecin().subscribe(doctors => {
+    this.doctors = doctors;
+  });*/
+}
+
+closeAddPaymentModal(event?: Event): void {
+  if (event) {
+    event.stopPropagation();
+  }
+  this.showAddPaymentModal = false;
+  this.resetNewPayment();
+}
+
+resetNewPayment(): void {
+  this.newPayment = {
+    nomPatient: '',
+    montant: 0,
+    modeDePaiement: 'Carte Bancaire',
+    datePaiement: new Date().toISOString().split('T')[0],
+    statut: PaymentStatus.Unpaid,
+    emailMedecin: '',
+    emailPatient: ''
+  };
+}
+
+submitPayment(): void {
+  // Set patient email if needed (you might need to modify this based on your data structure)
+  const selectedPatient = this.patients.find(p => p.name === this.newPayment.nomPatient);
+  if (selectedPatient) {
+    this.newPayment.emailPatient = selectedPatient.name;
+  }
+  
+  this.paymentService.addPaiement(this.newPayment).subscribe({
+    next: (response) => {
+      // Handle success
+      this.closeAddPaymentModal();
+      this.refreshPayments();
+      // Show success message
+    },
+    error: (error) => {
+      // Handle error
+      console.error('Error adding payment:', error);
+    }
+  });
+}
 }

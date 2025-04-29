@@ -43,7 +43,9 @@
     </div>
   </div>
 </div>
-
+<button class="btn icon-btn" (click)="refreshData()">
+  <i class="fas fa-sync-alt"></i>
+</button>
   <!-- Main Content -->
   <div class="content-column">
     <!-- Search and Filter -->
@@ -89,7 +91,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let request of paginatedRequests">
+            <tr *ngFor="let request of paginatedRequests" (click)="openDetailsModal(request)">
               <td class="assistant-cell">
                 <div class="assistant-info">
                   <div class="avatar">
@@ -124,11 +126,10 @@
                     <i class="fas fa-lightbulb"></i> Recommended
                   </span>
                   <div class="tooltip-content">
-                    <p><strong>Recommendation reason:</strong></p>
+                    <p><strong>Recommendation reason:de</strong></p>
                     <ul>
                       <li *ngIf="!hasOverlap(request)">No schedule conflicts</li>
                       <li *ngIf="hasLowLeaveCount(request)">Low recent leave count</li>
-                      <li *ngIf="!isPeakPeriod(request.startDate)">Not during peak period</li>
                     </ul>
                     <div class="workload-indicator">
                       <p>Workload impact: {{ getWorkloadLevel(request) | titlecase }}</p>
@@ -210,23 +211,7 @@
 
   <!-- Calendar Column (Admin Only) -->
   <div class="calendar-column">
-    <div class="heatmap-container" *ngIf="showHeatmap">
-      <div class="heatmap-header">
-        <h4><i class="fas fa-chart-line"></i> Demand Frequency Heatmap</h4>
-        <div class="heatmap-legend">
-          <span *ngFor="let item of heatmapLegend" [style.background]="item.color">
-            {{ item.label }}
-          </span>
-        </div>
-      </div>
-      <div class="heatmap">
-        <div *ngFor="let day of heatmapDays" 
-             class="heatmap-day"
-             [style.background]="getHeatmapColor(day.count)"
-             [title]="day.date | date: 'fullDate' + ': ' + day.count + ' requests'">
-        </div>
-      </div>
-    </div>
+     <!-- heat map-->
 
     <div class="calendar-section">
       <div class="section-header">
@@ -317,11 +302,83 @@
   </div>
 </div>
 
-<!-- Modals (Admin Only) -->
-<div class="modal-overlay" *ngIf="selectedRequest && curRole === 'ADMIN'">
-  <!-- Modal content here -->
-</div>
 
-<div class="leave-details-popup" *ngIf="selectedLeaveRequest && curRole === 'ADMIN'" [ngStyle]="popupPosition">
-  <!-- Popup content here -->
+<!-- Add this at the bottom of your template file -->
+<div class="modal-overlay" *ngIf="selectedRequest" (click)="closeModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Leave Request Details</h3>
+      <button class="btn-close" (click)="closeModal()">&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      <div class="detail-section">
+        <div class="detail-row">
+          <div class="detail-item">
+            <span class="detail-label">Assistant</span>
+            <span class="detail-value">
+              <div class="assistant-info">
+                <div class="avatar">{{ getInitials(selectedRequest.assistantEmail) }}</div>
+                <span>{{ selectedRequest.assistantEmail }}</span>
+              </div>
+            </span>
+          </div>
+          
+          <div class="detail-item">
+            <span class="detail-label">Status</span>
+            <span class="detail-value">
+              <span class="status-badge" [ngClass]="selectedRequest.status.toLowerCase()">
+                {{ selectedRequest.status }}
+              </span>
+            </span>
+          </div>
+        </div>
+        
+        <div class="detail-row">
+          <div class="detail-item">
+            <span class="detail-label">Period</span>
+            <span class="detail-value">
+              {{ selectedRequest.startDate | date:'mediumDate' }} - 
+              {{ selectedRequest.endDate | date:'mediumDate' }}
+              ({{ calculateDuration(selectedRequest.startDate, selectedRequest.endDate) }} days)
+            </span>
+          </div>
+          
+          <div class="detail-item">
+            <span class="detail-label">Request Date</span>
+            <span class="detail-value">
+              {{ selectedRequest.requestDate | date:'mediumDate' }}
+            </span>
+          </div>
+        </div>
+        
+        <div class="detail-row full-width">
+          <div class="detail-item">
+            <span class="detail-label">Reason</span>
+            <span class="detail-value reason-text">
+              {{ selectedRequest.reason }}
+            </span>
+          </div>
+        </div>
+        
+        <div class="detail-row full-width" *ngIf="selectedRequest.comments">
+          <div class="detail-item">
+            <span class="detail-label">Comments</span>
+            <span class="detail-value">
+              {{ selectedRequest.comments }}
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="detail-actions" *ngIf="selectedRequest.status === 'Pending'">
+        <button class="btn btn-approve" (click)="updateStatus(selectedRequest.id, 'Approved')">
+          <i class="fas fa-check"></i> Approve
+        </button>
+        <button class="btn btn-reject" (click)="updateStatus(selectedRequest.id, 'Rejected')">
+          <i class="fas fa-times"></i> Reject
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

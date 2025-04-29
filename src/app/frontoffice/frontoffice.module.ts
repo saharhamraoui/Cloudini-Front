@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from '../shared/shared.module';
 import { BilanListComponent } from './components/BilanFront/bilan-list/bilan-list.component';
@@ -23,7 +24,6 @@ import { ListRendezVousComponent } from './components/rendezVous/list-rendez-vou
 import { UpdateRendezVousComponent } from './components/rendezVous/update-rendez-vous/update-rendez-vous.component';
 import { FrontofficeRoutingModule } from './frontoffice-routing.module';
 import { FrontofficeComponent } from './frontoffice.component';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -56,6 +56,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     FrontofficeRoutingModule,  // No need for duplicate
     ToastrModule.forRoot(),
     MatDialogModule,
+    
+
 
 
   ]

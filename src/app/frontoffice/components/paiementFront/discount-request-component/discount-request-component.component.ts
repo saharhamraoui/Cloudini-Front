@@ -17,6 +17,7 @@ export class DiscountRequestComponentComponent implements OnInit {
   errorMessage: string = '';
   paymentId: number | null = null;
   isLoading: boolean = false;
+  currentPayment!:Paiement;
 
   constructor(
     private discountService: DiscountPaymentService,
@@ -62,13 +63,22 @@ export class DiscountRequestComponentComponent implements OnInit {
     }
 
     // Prepare the updated payment data
-    const updatedPayment: Partial<Paiement> = {
-      discountRequested: true,
-      discountStatus: DiscountStatus.PENDING
-    };
+  
+
+    this.paymentService.getPaiementById(this.paymentId).subscribe({
+      next: (payment) => {
+        this.currentPayment = payment;
+        console.log('Payment details:', payment);
+      },
+      error: (err) => console.error('Error fetching payment', err)
+    });
+
+    this.currentPayment.discountRequested=true;
+    this.currentPayment.discountStatus=DiscountStatus.PENDING;
+
 
     // First update the payment status
-    this.paymentService.updatePaiement(this.paymentId, updatedPayment as Paiement).subscribe({
+    this.paymentService.updatePaiement(this.paymentId, this.currentPayment as Paiement).subscribe({
       next: () => {
         // Then upload the disability card
         this.discountService.uploadDisabilityCard(this.paymentId!, this.selectedFile!, this.message).subscribe({

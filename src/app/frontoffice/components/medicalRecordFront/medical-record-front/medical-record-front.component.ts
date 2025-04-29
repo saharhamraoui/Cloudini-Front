@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { jsPDF } from 'jspdf';
@@ -10,7 +11,19 @@ import { BilanListComponent } from '../../BilanFront/bilan-list/bilan-list.compo
 @Component({
   selector: 'app-medical-record-front',
   templateUrl: './medical-record-front.component.html',
-  styleUrls: ['./medical-record-front.component.css']
+  styleUrls: ['./medical-record-front.component.css'],
+  animations: [
+    trigger('cardAnimation', [
+      state('in', style({ opacity: 1, transform: 'translateY(0)' })),
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('300ms ease-out')
+      ]),
+      transition(':leave', [
+        animate('300ms ease-in', style({ opacity: 0, transform: 'translateY(20px)' }))
+      ])
+    ])
+  ]
 })
 export class MedicalRecordFrontComponent implements OnInit {
    currentUser = {

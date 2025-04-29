@@ -1574,3 +1574,354 @@ houni
 .meter-bar.high { background: #F44336; }
 
 
+
+/* detail modal */
+
+/* Add these styles to your component's CSS file */
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-container {
+  background: white;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #95a5a6;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.btn-close:hover {
+  color: #e74c3c;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+/* Detail section styles */
+.detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detail-row {
+  display: flex;
+  gap: 20px;
+}
+
+.detail-row.full-width {
+  display: block;
+}
+
+.detail-item {
+  flex: 1;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: #7f8c8d;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.detail-value {
+  color: #2c3e50;
+  font-size: 15px;
+}
+
+.reason-text {
+  white-space: pre-line;
+  line-height: 1.5;
+}
+
+/* Assistant info styles */
+.assistant-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #3498db;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+/* Status badge styles */
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.status-badge.pending {
+  background-color: rgba(241, 196, 15, 0.1);
+  color: #f1c40f;
+}
+
+.status-badge.approved {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.status-badge.rejected {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+/* Action buttons */
+.detail-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-approve {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+}
+
+.btn-approve:hover {
+  background-color: #219653;
+}
+
+.btn-reject {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+}
+
+.btn-reject:hover {
+  background-color: #c0392b;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modal-container {
+    width: 95%;
+  }
+  
+  .detail-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .detail-actions {
+    justify-content: center;
+  }
+}
+
+/* Add these styles to your component's CSS */
+
+.calendar-day {
+  /* Your existing styles */
+  position: relative;
+}
+
+.calendar-day.has-leave::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #95a5a6; /* Default dot color */
+}
+
+.calendar-day.has-approved::after {
+  background: #4CAF50; /* Green for approved */
+}
+
+.calendar-day.has-pending::after {
+  background: #FFC107; /* Yellow for pending */
+}
+
+.calendar-day.has-rejected::after {
+  background: #F44336; /* Red for rejected */
+}
+
+.calendar-day.has-approved.has-pending::after,
+.calendar-day.has-approved.has-rejected::after,
+.calendar-day.has-pending.has-rejected::after {
+  /* When multiple statuses exist on same day */
+  background: linear-gradient(45deg, 
+    #4CAF50 0%, #4CAF50 33%, 
+    #FFC107 33%, #FFC107 66%, 
+    #F44336 66%, #F44336 100%);
+}
+
+
+
+/* Calendar day styling */
+.calendar-day {
+  position: relative;
+}
+
+.calendar-day.has-leave::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #95a5a6;
+}
+
+.calendar-day.has-approved::after {
+  background: #4CAF50;
+}
+
+.calendar-day.has-pending::after {
+  background: #FFC107;
+}
+
+.calendar-day.has-rejected::after {
+  background: #F44336;
+}
+
+.calendar-day.has-approved.has-pending::after,
+.calendar-day.has-approved.has-rejected::after,
+.calendar-day.has-pending.has-rejected::after {
+  background: linear-gradient(45deg, 
+    #4CAF50 0%, #4CAF50 33%, 
+    #FFC107 33%, #FFC107 66%, 
+    #F44336 66%, #F44336 100%);
+}
+
+/* Leave event styling */
+.leave-event {
+  margin: 2px 0;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.leave-event.status-approved {
+  background-color: rgba(76, 175, 80, 0.1);
+  border-left: 3px solid #4CAF50;
+}
+
+.leave-event.status-pending {
+  background-color: rgba(255, 193, 7, 0.1);
+  border-left: 3px solid #FFC107;
+}
+
+.leave-event.status-rejected {
+  background-color: rgba(244, 67, 54, 0.1);
+  border-left: 3px solid #F44336;
+}
+
+.event-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.assistant-initial {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #3498db;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.leave-duration {
+  font-size: 10px;
+  color: #7f8c8d;
+}
+
+.event-status-icon {
+  font-size: 14px;
+}
+
+.fa-check-circle {
+  color: #4CAF50;
+}
+
+.fa-times-circle {
+  color: #F44336;
+}
+
+.fa-clock {
+  color: #FFC107;
+}

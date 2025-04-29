@@ -41,6 +41,9 @@
       <div class="list-header">
         <h2><i class="fas fa-list-ul"></i> Your Medication List</h2>
         <div class="list-controls">
+          <button class="add-prescription-btn" (click)="openAddPrescriptionModal()">
+            <i class="fas fa-plus-circle"></i> Add Prescription
+          </button>
           <div class="search-prescriptions">
             <i class="fas fa-search"></i>
             <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search medications...">
@@ -212,6 +215,74 @@
       </div>
     </div>
 
+    <div class="modal-overlay" *ngIf="showAddPrescriptionModal">
+      <div class="add-prescription-modal" (click)="$event.stopPropagation()">
+        <div class="modal-header baby-blue-header">
+          <h3><i class="fas fa-file-medical"></i> Add New Prescription</h3>
+          <button class="close-modal" (click)="closeAddPrescriptionModal()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="modal-body scrollable-content">
+          <form #prescriptionForm="ngForm" (ngSubmit)="onSubmitPrescription()">
+            <div class="form-section">
+              <div class="form-group full-width">
+                <label for="medication"><i class="fas fa-pills"></i> Medication Name</label>
+                <input type="text" id="medication" name="medication" 
+                       [(ngModel)]="newPrescription.medication" required
+                       class="soft-input" placeholder="e.g., Amoxicillin 500mg">
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group half-width">
+                  <label for="dosage"><i class="fas fa-syringe"></i> Dosage</label>
+                  <input type="text" id="dosage" name="dosage" 
+                         [(ngModel)]="newPrescription.dosage" required
+                         class="soft-input" placeholder="e.g., 1 tablet">
+                </div>
+                
+                <div class="form-group half-width">
+                  <label for="status"><i class="fas fa-heartbeat"></i> Status</label>
+                  <select id="status" name="status" 
+                          [(ngModel)]="newPrescription.status" required
+                          class="soft-input">
+                    <option value="ACTIVE">Active</option>
+                    <option value="PENDING">Pending</option>
+                    <option value="COMPLETED">Completed</option>
+                    <option value="EXPIRED">Expired</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group full-width">
+                <label for="instructions"><i class="fas fa-comment-medical"></i> Patient Instructions</label>
+                <textarea id="instructions" name="instructions" 
+                          [(ngModel)]="newPrescription.instructions" required
+                          class="soft-input" rows="4"
+                          placeholder="e.g., Take twice daily after meals"></textarea>
+              </div>
+              
+              <div class="form-group full-width">
+                <label for="issueDate"><i class="fas fa-calendar-check"></i> Issue Date</label>
+                <input type="date" id="issueDate" name="issueDate" 
+                       [(ngModel)]="newPrescription.issueDate" required
+                       class="soft-input">
+              </div>
+            </div>
+            
+            <div class="modal-actions">
+              <button type="button" class="modal-btn cancel" (click)="closeAddPrescriptionModal()">
+                <i class="fas fa-times-circle"></i> Cancel
+              </button>
+              <button type="submit" class="modal-btn submit" [disabled]="!prescriptionForm.valid">
+                <i class="fas fa-save"></i> Save Prescription
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <app-chat-bot></app-chat-bot>
 
   </div>
