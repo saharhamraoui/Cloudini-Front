@@ -19,7 +19,7 @@ export class DiseaseServiceService {
    * @returns Observable<string> avec la maladie prédite
    */
   public predictDisease(symptoms: string[]): Observable<string> {
-    return this.http.post(`${this.urlServeurApi}/pidb/disease/predict`, symptoms, {
+    return this.http.post(`${this.urlServeurApi}/disease/predict`, symptoms, {
       responseType: 'text'
     });
   }
