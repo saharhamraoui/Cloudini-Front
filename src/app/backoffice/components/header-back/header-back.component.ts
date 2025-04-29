@@ -45,9 +45,5 @@ export class HeaderBackComponent {
     sessionStorage.clear();
     if (this.currRole == 'admin') this._router.navigate(['/login']);
     else this._router.navigate(['/login']), window.location.reload();
-;
   }
-
- 
-
 }

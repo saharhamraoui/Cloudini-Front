@@ -28,7 +28,7 @@ export class AddConsultationBackComponent {
 
   ngOnInit(): void {
     this.consultationForm = new FormGroup({
-        dateConsultation: new FormControl('', [Validators.required]),
+
         rapport: new FormControl('', [Validators.required]),
         rendezVous: new FormControl('', [Validators.required]),
         medicalRecord: new FormControl('', [Validators.required]),

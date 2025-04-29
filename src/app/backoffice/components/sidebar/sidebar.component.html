@@ -1,113 +1,189 @@
 <aside class="sidebar">
-    <div class="image-container">
-      <!--<img src="assets/backoffice/sidebar-image.png"  class="sidebar-image">-->
-    </div>
-    <nav class="menu">
-        <!-- Avatar Section -->
-  <div class="avatar-container">
-    <div class="avatar-circle">
-      {{ getAvatarInitials() }}
-    </div>
-    <div class="user-name">
-      {{ currentUser.firstName }} {{ currentUser.lastName }}
-    </div>
+  <div class="image-container">
+    <!-- Optional: <img src="assets/backoffice/sidebar-image.png" class="sidebar-image"> -->
   </div>
-        <ul>
-          <li>
-            <a [routerLink]="['/back/doctordashboard']">
-              <i class="fas fa-sliders-h"></i> <!-- Contrôles de paramètres -->
-              <span> Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a [routerLink]="['/editdoctorprofile']">
-              <i class="fas fa-user-circle"></i> <!-- Profile icon -->
-              <span> Profile</span>
-            </a>
-          </li>
-            <li>
-              <a [routerLink]="['/back/approvalstatus']">
-                <i class="fa fa-check" aria-hidden="true"></i>
-                <label style="cursor: pointer"> Statut d'approbation</label>
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/back/list-rendez-vous-back']">                <i class="fa fa-calendar" aria-hidden="true"></i>
-                <label style="cursor: pointer"> list des Rendez-vous</label>
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/back/list-consultation-Back']">
-                <i class="fa fa-calendar" aria-hidden="true"></i>
-                <label style="cursor: pointer"> list des Consultation</label>
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/back/ajouterassistant']">
-                <i class="fa fa-user-md" aria-hidden="true"></i>
-                <label style="cursor: pointer"> Liste des assistants</label>
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/stock']">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                <label style="cursor: pointer"> Liste des produits</label>
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/commande']">
-                <i class="fa fa-sticky-note" aria-hidden="true"></i>
-                <label style="cursor: pointer"> Liste des commandes</label>
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/doctorlist']">
-                <i class="fa fa-user-md" aria-hidden="true"></i>
-                <label style="cursor: pointer"> Liste des médecins</label>
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/patientlist']">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <label style="cursor: pointer"> Patients</label>
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/back/listPaiement']">
-                <i class="fa fa-credit-card" aria-hidden="true"></i>
-                <label style="cursor: pointer"> Paiements</label>
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/back/listMedicalRecord']">
-                <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                <label style="cursor: pointer"> medicalRecord</label>
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/addprescription']">
-                <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                <label style="cursor: pointer"> Ajouter des ordonnances</label>
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/back/listPrescription']">
-                <i class="fa fa-list" aria-hidden="true"></i>
-                <label style="cursor: pointer"> List des ordonnances</label>
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/back/listLeaveRequest']">
-                <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
-                <label style="cursor: pointer"> List des conges</label>
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/']">
-                <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
-                <label style="cursor: pointer"> Log out</label>
-              </a>
-            </li>
-          </ul>
-    </nav>
-  </aside>
+  <nav class="menu">
+    <!-- Avatar Section -->
+    <div class="avatar-container">
+      <div class="avatar-circle">
+        {{ getAvatarInitials() }}
+      </div>
+      <div class="user-name">
+        {{ currentUser.firstName }} {{ currentUser.lastName }}
+      </div>
+    </div>
+
+    <ul>
+      <li>
+        <a [routerLink]="['/back/doctordashboard']">
+          <i class="fas fa-sliders-h"></i> <!-- Contrôles de paramètres -->
+          <span> Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/editdoctorprofile']">
+          <i class="fas fa-user-circle"></i> <!-- Profile icon -->
+          <span> Profile</span>
+        </a>
+      </li>
+        <li>
+          <a [routerLink]="['/back/approvalstatus']">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            <label style="cursor: pointer"> Statut d'approbation</label>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/back/list-rendez-vous-back']">                <i class="fa fa-calendar" aria-hidden="true"></i>
+            <label style="cursor: pointer"> list des Rendez-vous</label>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/back/list-consultation-Back']">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <label style="cursor: pointer"> list des Consultation</label>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/back/ajouterassistant']">
+            <i class="fa fa-user-md" aria-hidden="true"></i>
+            <label style="cursor: pointer"> Liste des assistants</label>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/stock']">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <label style="cursor: pointer"> Liste des produits</label>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/commande']">
+            <i class="fa fa-sticky-note" aria-hidden="true"></i>
+            <label style="cursor: pointer"> Liste des commandes</label>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/doctorlist']">
+            <i class="fa fa-user-md" aria-hidden="true"></i>
+            <label style="cursor: pointer"> Liste des médecins</label>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/patientlist']">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <label style="cursor: pointer"> Patients</label>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/back/listPaiement']">
+            <i class="fa fa-credit-card" aria-hidden="true"></i>
+            <label style="cursor: pointer"> Paiements</label>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/back/listMedicalRecord']">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            <label style="cursor: pointer"> medicalRecord</label>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/addprescription']">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            <label style="cursor: pointer"> Ajouter des ordonnances</label>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/back/listPrescription']">
+            <i class="fa fa-list" aria-hidden="true"></i>
+            <label style="cursor: pointer"> List des ordonnances</label>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/back/listLeaveRequest']">
+            <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+            <label style="cursor: pointer"> List des conges</label>
+          </a>
+        </li>
+      <li>
+        <a [routerLink]="['/editdoctorprofile']" routerLinkActive="active">
+          <i class="fas fa-user-circle"></i> <!-- Profile icon -->
+          <span> Profile</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/back/doctordashboard']" routerLinkActive="active">
+          <i class="fas fa-sliders-h"></i> <!-- ContrÃ´les de paramÃ¨tres -->
+          <span> Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/back/DashboardStock']" routerLinkActive="active">
+          <i class="fas fa-sliders-h icon-spaced"></i>
+          <span>Stock Dashboard</span>
+        </a>
+      </li>
+      
+        <li>
+          <a [routerLink]="['/back/list-rendez-vous-back']" routerLinkActive="active"> 
+             <i class="fa fa-calendar" aria-hidden="true"></i>
+            <label style="cursor: pointer"> list des Rendez-vous</label>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/back/list-consultation-Back']" routerLinkActive="active">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <label style="cursor: pointer"> list des Consultation</label>
+          </a>
+        </li>
+        
+        <li>
+          <a [routerLink]="['/back/crudmed']" routerLinkActive="active">
+            <i class="fa fa-pills icon-spaced"></i>
+            <label>Medications</label>
+          </a>
+        </li>
+  
+        <li>
+          <a [routerLink]="['/back/stock']" routerLinkActive="active">
+            <i class="fa fa-boxes icon-spaced"></i>
+            <label>Stock</label>
+          </a>
+        </li>
+  
+        <li>
+          <a [routerLink]="['/back/commandes']" routerLinkActive="active">
+            <i class="fa fa-file-invoice icon-spaced"></i>
+            <label>Orders</label>
+          </a>
+        </li>
+  
+        <li>
+          <a [routerLink]="['/back/verifcommandes']" routerLinkActive="active">
+            <i class="fa fa-tasks icon-spaced"></i>
+            <label>Orders Confirmation</label>
+          </a>
+        </li>
+  
+        <li>
+          <a [routerLink]="['/back/fournisseur']" routerLinkActive="active">
+            <i class="fa fa-truck icon-spaced"></i>
+            <label>Providers List</label>
+          </a>
+        </li>
+  
+        <li>
+          <a [routerLink]="['/back/crudfournisseur']" routerLinkActive="active">
+            <i class="fa fa-industry icon-spaced"></i>
+            <label>Providers</label>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/']">
+            <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+            <label style="cursor: pointer"> Log out</label>
+          </a>
+        </li>
+    </ul>
+  </nav>
+</aside>
+
+      

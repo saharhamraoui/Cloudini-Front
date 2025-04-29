@@ -1,12 +1,32 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+<<<<<<< HEAD
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+=======
+>>>>>>> blogfront
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { FrontofficeRoutingModule } from './frontoffice/frontoffice-routing.module';
+import { FournisseurListComponent } from './backoffice/components/fournisseur-list/fournisseur-list.component';
+import { FournisseurDetailComponent } from './backoffice/components/fournisseur-detail/fournisseur-detail.component';
+import { MedicamentListComponent } from './backoffice/components/medicament-list/medicament-list.component';
+import { CommandeListComponent } from './backoffice/components/commande-list/commande-list.component';
+import { GestionCommandesComponent } from './backoffice/components/gestion-commandes/gestion-commandes.component';
+import { StockComponent } from './backoffice/components/stock/stock.component';
+import { GestionfournisseurComponent } from './backoffice/components/gestionfournisseur/gestionfournisseur.component';
+import { GestionmedsComponent } from './backoffice/components/gestionmeds/gestionmeds.component';
+import { StatusFilterPipe } from './pipes/status-filter.pipe';
+import { SuivreCommandeComponent } from './backoffice/components/suivre-commande/suivre-commande.component';
+import { BackofficeComponent } from './backoffice/backoffice.component';
 import { RoleSelectionComponent } from './components/role-selection/role-selection.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -68,6 +88,14 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     BrowserAnimationsModule,
     MatPaginatorModule,
     SocialLoginModule
+    ReactiveFormsModule,
+    ClipboardModule,
+    FormsModule,
+    BrowserAnimationsModule,
+        ToastrModule.forRoot(),
+        MatSnackBarModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
