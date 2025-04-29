@@ -1,14 +1,25 @@
 <aside class="sidebar" [ngClass]="{'collapsed': isCollapsed}">
+  <!-- Sidebar Header with Logo -->
   <div class="sidebar-header">
-    <div class="avatar">{{ getAvatarInitials() }}</div>
-    <div class="user-info" *ngIf="!isCollapsed">
-      <span class="user-name">{{ currentUser.firstName }} {{ currentUser.lastName }}</span>
-      <span class="user-role">{{ currentUser.role }}</span>
+    <div class="logo">
+      <i class="fas fa-shield-alt"></i>
+      <span *ngIf="!isCollapsed">Admin Panel</span>
     </div>
     <button class="toggle-btn" (click)="toggleSidebar()">
       <i class="fas" [ngClass]="isCollapsed ? 'fa-angle-right' : 'fa-angle-left'"></i>
     </button>
   </div>
+
+  <!-- User Info -->
+  <div class="user-info-section" *ngIf="!isCollapsed">
+    <div class="avatar">{{ getAvatarInitials() }}</div>
+    <div class="user-info">
+      <span class="user-name">{{ currentUser.firstName }} {{ currentUser.lastName }}</span>
+      <span class="user-role">{{ currentUser.role }}</span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
   <nav class="sidebar-nav">
     <a class="nav-item" routerLink="/admin/dashboard" routerLinkActive="active" *ngIf="isAdmin">
       <i class="fas fa-tachometer-alt"></i>
@@ -31,11 +42,14 @@
       <span *ngIf="!isCollapsed">Tâches à faire</span>
     </button>
   </nav>
+
+  <!-- Footer with Logout -->
   <div class="sidebar-footer" *ngIf="!isCollapsed">
     <button class="logout-btn" (click)="logout()">
       <i class="fas fa-sign-out-alt"></i> Déconnexion
     </button>
   </div>
+
   <!-- Tasks Panel -->
   <div class="tasks-panel" *ngIf="showTasks">
     <div class="tasks-header">

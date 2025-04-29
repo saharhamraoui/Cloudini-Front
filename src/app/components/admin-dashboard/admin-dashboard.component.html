@@ -1,5 +1,41 @@
 <div class="admin-container">
   <div class="dashboard-wrapper">
+    <!-- Statistics Cards -->
+    <div class="stats-cards animate-fade-in">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-eye"></i></div>
+        <div class="stat-content">
+          <h3>{{dataMap['users'].current.length}}</h3>
+          <p>Total Users</p>
+          <span class="stat-trend up"><i class="fas fa-arrow-up"></i> 70.5%</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-users"></i></div>
+        <div class="stat-content">
+          <h3>{{dataMap['patients'].current.length}}</h3>
+          <p>Total Patients</p>
+          <span class="stat-trend down"><i class="fas fa-arrow-down"></i> 27.4%</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-user-md"></i></div>
+        <div class="stat-content">
+          <h3>{{dataMap['medecins'].current.length}}</h3>
+          <p>Total Doctors</p>
+          <span class="stat-trend down"><i class="fas fa-arrow-down"></i> 27.4%</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-car"></i></div>
+        <div class="stat-content">
+          <h3>{{dataMap['chauffeurs'].current.length}}</h3>
+          <p>Total Drivers</p>
+          <span class="stat-trend down"><i class="fas fa-arrow-down"></i> 27.4%</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Header -->
     <div class="dashboard-header">
       <div class="header-content">
@@ -14,59 +50,10 @@
               </button>
             </div>
           </div>
-          <!-- Ajoutez le bouton dans les actions du header -->
-<div class="header-actions">
-  ...
-  <button class="btn btn-info" (click)="runSentimentAnalysis()" [disabled]="isAnalyzing">
-    <i class="fas fa-brain"></i> 
-    {{ isAnalyzing ? 'Analyse en cours...' : 'Analyser les Sentiments' }}
-  </button>
-</div>
-
-<!-- Ajoutez cette section après les tables -->
-<div *ngIf="sentimentData" class="sentiment-analysis animate-fade-in">
-  <div class="card">
-    <div class="card-header">
-      <h5><i class="fas fa-chart-pie"></i> Analyse des Sentiments des Profils</h5>
-    </div>
-    <div class="card-body">
-      <div class="sentiment-cards">
-        <div class="sentiment-card positive">
-          <div class="icon"><i class="fas fa-smile"></i></div>
-          <div class="count">{{ sentimentData.positive }}</div>
-          <div class="label">Positifs</div>
-        </div>
-        
-        <div class="sentiment-card neutral">
-          <div class="icon"><i class="fas fa-meh"></i></div>
-          <div class="count">{{ sentimentData.neutral }}</div>
-          <div class="label">Neutres</div>
-        </div>
-        
-        <div class="sentiment-card negative">
-          <div class="icon"><i class="fas fa-frown"></i></div>
-          <div class="count">{{ sentimentData.negative }}</div>
-          <div class="label">Négatifs</div>
-        </div>
-      </div>
-      
-      <div class="insights">
-        <div class="alert alert-info">
-          <i class="fas fa-lightbulb"></i>
-          <span *ngIf="sentimentData.positive > sentimentData.negative">
-            La majorité des utilisateurs ont des descriptions positives !
-          </span>
-          <span *ngIf="sentimentData.negative > sentimentData.positive">
-            Attention : Plusieurs utilisateurs ont des descriptions négatives
-          </span>
-          <span *ngIf="sentimentData.negative === sentimentData.positive">
-            Équilibre entre descriptions positives et négatives
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+          <button class="btn btn-info" (click)="runSentimentAnalysis()" [disabled]="isAnalyzing">
+            <i class="fas fa-brain"></i> 
+            {{ isAnalyzing ? 'Analyse en cours...' : 'Analyser les Sentiments' }}
+          </button>
           <div class="export-buttons animate-slide-in">
             <button class="btn btn-primary" (click)="exportToPDF()" title="Exporter en PDF">
               <i class="fas fa-file-pdf"></i> PDF
@@ -118,7 +105,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of dataMap[currentTab].displayed; trackBy: trackById">
+              <tr *ngFor="let user of dataMap['users'].displayed; trackBy: trackById">
                 <td>{{ user.lastName }}</td>
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.email }}</td>
@@ -143,13 +130,13 @@
               </tr>
             </tbody>
           </table>
-          <div *ngIf="dataMap[currentTab].current.length === 0" class="no-data">
+          <div *ngIf="dataMap['users'].current.length === 0" class="no-data">
             Aucun utilisateur trouvé
           </div>
           <mat-paginator
             [pageSize]="pageSize"
             [pageSizeOptions]="pageSizeOptions"
-            [length]="dataMap[currentTab].current.length"
+            [length]="dataMap['users'].current.length"
             (page)="handlePageEvent($event)"
             showFirstLastButtons>
           </mat-paginator>
@@ -173,7 +160,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let patient of dataMap[currentTab].displayed; trackBy: trackById">
+              <tr *ngFor="let patient of dataMap['patients'].displayed; trackBy: trackById">
                 <td>{{ patient.lastName }}</td>
                 <td>{{ patient.firstName }}</td>
                 <td>{{ patient.email }}</td>
@@ -202,13 +189,13 @@
               </tr>
             </tbody>
           </table>
-          <div *ngIf="dataMap[currentTab].current.length === 0" class="no-data">
+          <div *ngIf="dataMap['patients'].current.length === 0" class="no-data">
             Aucun patient trouvé
           </div>
           <mat-paginator
             [pageSize]="pageSize"
             [pageSizeOptions]="pageSizeOptions"
-            [length]="dataMap[currentTab].current.length"
+            [length]="dataMap['patients'].current.length"
             (page)="handlePageEvent($event)"
             showFirstLastButtons>
           </mat-paginator>
@@ -230,7 +217,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let medecin of dataMap[currentTab].displayed; trackBy: trackById">
+              <tr *ngFor="let medecin of dataMap['medecins'].displayed; trackBy: trackById">
                 <td>{{ medecin.lastName }}</td>
                 <td>{{ medecin.firstName }}</td>
                 <td>{{ medecin.email }}</td>
@@ -266,13 +253,13 @@
               </tr>
             </tbody>
           </table>
-          <div *ngIf="dataMap[currentTab].current.length === 0" class="no-data">
+          <div *ngIf="dataMap['medecins'].current.length === 0" class="no-data">
             Aucun médecin trouvé
           </div>
           <mat-paginator
             [pageSize]="pageSize"
             [pageSizeOptions]="pageSizeOptions"
-            [length]="dataMap[currentTab].current.length"
+            [length]="dataMap['medecins'].current.length"
             (page)="handlePageEvent($event)"
             showFirstLastButtons>
           </mat-paginator>
@@ -293,7 +280,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let chauffeur of dataMap[currentTab].displayed; trackBy: trackById">
+              <tr *ngFor="let chauffeur of dataMap['chauffeurs'].displayed; trackBy: trackById">
                 <td>{{ chauffeur.lastName }}</td>
                 <td>{{ chauffeur.firstName }}</td>
                 <td>{{ chauffeur.email }}</td>
@@ -328,16 +315,72 @@
               </tr>
             </tbody>
           </table>
-          <div *ngIf="dataMap[currentTab].current.length === 0" class="no-data">
+          <div *ngIf="dataMap['chauffeurs'].current.length === 0" class="no-data">
             Aucun chauffeur trouvé
           </div>
           <mat-paginator
             [pageSize]="pageSize"
             [pageSizeOptions]="pageSizeOptions"
-            [length]="dataMap[currentTab].current.length"
+            [length]="dataMap['chauffeurs'].current.length"
             (page)="handlePageEvent($event)"
             showFirstLastButtons>
           </mat-paginator>
+        </div>
+      </div>
+
+      <!-- Sentiment Analysis -->
+      <div *ngIf="sentimentData" class="sentiment-analysis animate-fade-in">
+        <div class="card">
+          <div class="card-header">
+            <h5><i class="fas fa-chart-pie"></i> Analyse des Sentiments des Profils</h5>
+          </div>
+          <div class="card-body">
+            <div class="sentiment-cards">
+              <div class="sentiment-card positive">
+                <div class="icon"><i class="fas fa-smile"></i></div>
+                <div class="count">{{ sentimentData.positive }}</div>
+                <div class="label">Positifs</div>
+              </div>
+              <div class="sentiment-card neutral">
+                <div class="icon"><i class="fas fa-meh"></i></div>
+                <div class="count">{{ sentimentData.neutral }}</div>
+                <div class="label">Neutres</div>
+              </div>
+              <div class="sentiment-card negative">
+                <div class="icon"><i class="fas fa-frown"></i></div>
+                <div class="count">{{ sentimentData.negative }}</div>
+                <div class="label">Négatifs</div>
+              </div>
+            </div>
+            <div class="insights">
+              <div class="alert alert-info">
+                <i class="fas fa-lightbulb"></i>
+                <span *ngIf="sentimentData.positive > sentimentData.negative">
+                  La majorité des utilisateurs ont des descriptions positives !
+                </span>
+                <span *ngIf="sentimentData.negative > sentimentData.positive">
+                  Attention : Plusieurs utilisateurs ont des descriptions négatives
+                </span>
+                <span *ngIf="sentimentData.negative === sentimentData.positive">
+                  Équilibre entre descriptions positives et négatives
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="charts-section animate-fade-in">
+        <div class="chart-card">
+          <h3>Users Activity</h3>
+          <p>Placeholder for a line chart showing user activity over time.</p>
+          <!-- Add a chart library like Chart.js here if you have data -->
+        </div>
+        <div class="chart-card">
+          <h3>Weekly Statistics</h3>
+          <p>Placeholder for a bar chart showing weekly statistics.</p>
+          <!-- Add a chart library like Chart.js here if you have data -->
         </div>
       </div>
     </div>

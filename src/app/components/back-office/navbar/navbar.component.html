@@ -1,16 +1,25 @@
-<nav class="navbar" [ngClass]="{'dark-mode': isDarkMode}">
+<nav class="navbar">
   <div class="navbar-content">
     <div class="navbar-brand">
       <i class="fas fa-shield-alt"></i>
       <span>Administration</span>
     </div>
-    <div class="user-section">
-      <button class="theme-toggle" (click)="toggleDarkMode()" title="Toggle Dark Mode">
-        <i class="fas" [ngClass]="isDarkMode ? 'fa-sun' : 'fa-moon'"></i>
+    <div class="navbar-actions">
+      <button class="notification-btn">
+        <i class="fas fa-bell"></i>
+        <span class="badge badge-danger">3</span>
       </button>
-      <div class="user-profile">
-        <span class="avatar">{{ userName.charAt(0).toUpperCase() }}</span>
-        <span class="user-name">{{ userName }}</span>
+      <div class="user-profile dropdown">
+        <button class="user-profile-btn" (click)="toggleDropdown()">
+          <span class="avatar">{{ userName.charAt(0).toUpperCase() }}</span>
+          <span class="user-name">{{ userName }}</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" *ngIf="showDropdown">
+          <a class="dropdown-item" href="#">Profile</a>
+          <a class="dropdown-item" href="#">Settings</a>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
       </div>
     </div>
   </div>

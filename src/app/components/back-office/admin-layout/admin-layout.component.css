@@ -1,69 +1,64 @@
 .admin-layout {
   display: flex;
   min-height: 100vh;
-  height: 100%; /* Ensure it stretches to content height if taller than viewport */
+  height: 100%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(145deg, #E6F0FA 0%, #F7FAFC 100%);
-  position: relative; /* Provide positioning context for absolute children */
+  background: #F7FAFC;
+  position: relative;
   transition: background 0.3s ease;
-  margin: 0; /* Remove any default margins */
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 .admin-layout.dark-mode {
-  background: linear-gradient(145deg, #1F2937 0%, #374151 100%);
+  background: #1F2937;
 }
 
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 280px;
-  width: calc(100% - 280px);
-  min-height: 100vh; /* Ensure main-content also stretches */
+  margin-left: 260px;
+  width: calc(100% - 260px);
+  min-height: 100vh;
   transition: margin-left 0.3s ease, width 0.3s ease, margin-right 0.3s ease;
 }
 
 .sidebar-collapsed .main-content {
-  margin-left: 80px;
-  width: calc(100% - 80px);
+  margin-left: 70px;
+  width: calc(100% - 70px);
 }
 
 .content-wrapper {
-  padding: 2rem;
+  padding: 0;
   flex: 1;
   animation: fadeIn 0.5s ease-out;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: background 0.3s ease;
+  background: transparent;
+  box-shadow: none;
 }
 
 .dark-mode .content-wrapper {
-  background: rgba(55, 65, 81, 0.9);
+  background: transparent;
   color: #D1D5DB;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: none;
 }
 
-/* Minimize dashboard when tasks panel is visible */
 .tasks-visible .main-content {
-  width: calc(100% - 400px - 280px);
-  margin-right: 400px;
+  width: calc(100% - 350px - 260px);
+  margin-right: 350px;
 }
 
 .tasks-visible.sidebar-collapsed .main-content {
-  width: calc(100% - 400px - 80px);
-  margin-right: 400px;
+  width: calc(100% - 350px - 70px);
+  margin-right: 350px;
 }
 
-/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
   .main-content {
     margin-left: 200px;

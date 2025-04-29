@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -6,32 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  userName: string = 'admin'; // Default value, should be set from auth data
-  isDarkMode: boolean = false;
+  userName: string = 'admin';
+  showDropdown: boolean = false;
 
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     const authData = localStorage.getItem('authData');
     if (authData) {
       this.userName = JSON.parse(authData).firstName || 'admin';
     }
-    // Load dark mode preference
-    this.isDarkMode = localStorage.getItem('darkMode') === 'true';
-    this.updateDarkMode();
   }
 
-  toggleDarkMode(): void {
-    this.isDarkMode = !this.isDarkMode;
-    localStorage.setItem('darkMode', this.isDarkMode.toString());
-    this.updateDarkMode();
+  toggleDropdown(): void {
+    this.showDropdown = !this.showDropdown;
   }
 
-  private updateDarkMode(): void {
-    if (this.isDarkMode) {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-    }
+  logout(): void {
+    this.authService.logout();
+    localStorage.removeItem('authData');
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }

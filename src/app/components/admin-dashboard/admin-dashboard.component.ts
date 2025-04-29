@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -70,7 +69,6 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
   
-
   changeTab(tab: string): void {
     this.currentTab = tab;
     this.resetSearch();
@@ -81,6 +79,7 @@ export class AdminDashboardComponent implements OnInit {
   trackById(index: number, item: any): number {
     return item.idUser;
   }
+  
   search(): void {
     const term = this.searchTerm.toLowerCase();
     const filters: { [key: string]: (item: any) => boolean } = {
@@ -186,6 +185,7 @@ export class AdminDashboardComponent implements OnInit {
       });
     }
   }
+
   runSentimentAnalysis(): void {
     this.isAnalyzing = true;
     this.userService.analyzeSentiments().subscribe({
@@ -287,5 +287,4 @@ export class AdminDashboardComponent implements OnInit {
     const blob = new Blob([wbout], { type: 'application/octet-stream' });
     saveAs(blob, `${this.currentTab}-data.xlsx`);
   }
-  
 }

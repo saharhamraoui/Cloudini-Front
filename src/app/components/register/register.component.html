@@ -1,35 +1,34 @@
-<!-- Ensure Animate.css is included in index.html or angular.json -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
-<div class="register animate__animated animate__fadeIn">
+<div class="register">
   <div class="container">
     <div class="row">
       <!-- Left Sidebar -->
       <div class="col-lg-4 register-left animate__animated animate__fadeInLeft">
-        <h3 class="title">Join Our Platform</h3>
-        <p class="subtitle">Register as a Patient, Doctor, or Driver to get started.</p>
-        <button class="login-btn" routerLink="/login">
-          <i class="fas fa-sign-in-alt me-2"></i> Log In
-        </button>
+        <div class="sidebar-content">
+          <h3 class="title"><i class="fas fa-user-plus"></i> Join Our Platform</h3>
+          <p class="subtitle">Register as a Patient, Doctor, or Driver to get started.</p>
+          <button class="login-btn" routerLink="/login">
+            <i class="fas fa-sign-in-alt me-2"></i> Log In
+          </button>
+        </div>
       </div>
 
       <!-- Right Form Section -->
       <div class="col-lg-8 register-right animate__animated animate__fadeInRight">
         <!-- Role Tabs -->
-        <ul class="nav nav-tabs justify-content-center mb-4" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link" [class.active]="isPatient" (click)="selectRole('patient')">Patient</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [class.active]="isMedecin" (click)="selectRole('medecin')">Doctor</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [class.active]="isChauffeur" (click)="selectRole('chauffeur')">Driver</a>
-          </li>
-        </ul>
+        <div class="role-tabs">
+          <button class="tab-btn" [class.active]="isPatient" (click)="selectRole('patient')">
+            <i class="fas fa-procedures"></i> Patient
+          </button>
+          <button class="tab-btn" [class.active]="isMedecin" (click)="selectRole('medecin')">
+            <i class="fas fa-user-md"></i> Doctor
+          </button>
+          <button class="tab-btn" [class.active]="isChauffeur" (click)="selectRole('chauffeur')">
+            <i class="fas fa-car"></i> Driver
+          </button>
+        </div>
 
         <!-- Form Card -->
-        <div class="card p-4">
+        <div class="form-card">
           <h3 class="register-heading">{{role | titlecase}} Registration</h3>
           <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="animate__animated animate__fadeInUp">
             <div class="row">
@@ -192,8 +191,10 @@
             </div>
 
             <!-- Description Section -->
-            <div class="card mt-4">
-              <div class="card-header">Profile Description</div>
+            <div class="description-card mt-4">
+              <div class="card-header">
+                <h5><i class="fas fa-file-alt"></i> Profile Description</h5>
+              </div>
               <div class="card-body">
                 <div class="form-group mb-4">
                   <label class="form-label">Keywords</label>
@@ -237,7 +238,7 @@
               </button>
             </div>
 
-            <div *ngIf="showFaceRegistration" class="card mt-4 animate__animated animate__fadeIn">
+            <div *ngIf="showFaceRegistration" class="face-registration-card mt-4 animate__animated animate__fadeIn">
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-6">
