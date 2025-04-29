@@ -1,5 +1,5 @@
 .sidebar {
-  width: 300px;
+  width: 250px;
   background: #2c3e50; /* Dark blue-gray */
   color: white;
   position: fixed;
@@ -8,8 +8,6 @@
   height: 100vh;
   overflow-y: auto;
   z-index: 1000;
-  min-width: 300px; /* Prevents shrinking */
-
 }
 
 /* Logo/image container */
@@ -88,7 +86,6 @@ font-weight: bold;
 margin: 0 auto 10px;
 text-transform: uppercase;
 }
-
 .icon-spaced {
   margin-right: 8px;
 }
