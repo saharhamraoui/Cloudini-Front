@@ -171,8 +171,8 @@
                 <i class="fas fa-sort" [class.fa-sort-up]="sortField === 'statut' && sortDirection === 'asc'"
                                 [class.fa-sort-down]="sortField === 'statut' && sortDirection === 'desc'"></i>
               </th>
-              <th>Discount Status</th>
 
+              <th>Discount</th>
               <th class="actions-header">Actions</th>
             </tr>
           </thead>
@@ -191,29 +191,16 @@
                   {{getStatusDisplay(paiement.statut)}}
                 </span>
               </td>
-              <td data-label="Discount Status">
-                <span class="discount-badge" [ngClass]="getDiscountStatusClass(paiement)">
-                  {{getDiscountStatusDisplay(paiement)}}
-                </span>
-                <button *ngIf="paiement.disabilityCardId" 
-                        class="btn-view-card" 
-                        (click)="viewDisabilityCard(paiement)">
-                  <i class="fas fa-id-card"></i> View Card
-                </button>
-              </td>
+              <td data-label="Discount">
+        <span class="status-badge" [ngClass]="getDiscountStatusClass(paiement)">
+          {{getDiscountStatusDisplay(paiement)}}
+        </span>
+        <button class="btn-action btn-view" (click)="openDiscountModal(paiement)" *ngIf="paiement.discountRequested">
+          <i class="fas fa-info-circle"></i>
+        </button>
+      </td>
               <td class="actions-cell">
                 <div class="action-buttons">
-                
-                      <button *ngIf="showDiscountActions(paiement)" 
-                              class="btn-action btn-approve" 
-                              (click)="approveDiscount(paiement)">
-                        <i class="fas fa-check"></i>
-                      </button>
-                      <button *ngIf="showDiscountActions(paiement)" 
-                              class="btn-action btn-reject" 
-                              (click)="openRejectDialog(paiement)">
-                        <i class="fas fa-times"></i>
-                      </button>
                 
                   <button class="btn-action btn-view" (click)="viewDetails(paiement)">
                     <i class="fas fa-eye"></i>
@@ -447,50 +434,136 @@
       </div>
     </div>
   </div>
-  <!-- Add this modal for rejection -->
-<div class="modal-overlay" *ngIf="isRejectDialogVisible">
-  <div class="modal-container">
+ 
+<!-- Add this modal to your template, preferably near the other modals -->
+<!-- Discount Details Modal -->
+<div class="modal-overlay" *ngIf="selectedDiscountPayment">
+  <div class="modal-container wide">
     <div class="modal-header">
-      <h3>Reject Discount Request</h3>
-      <button class="btn-close" (click)="closeRejectDialog()">
+      <h3>Discount Request Details #{{selectedDiscountPayment.id}}</h3>
+      <button class="btn-close" (click)="closeDiscountModal()">
         <i class="fas fa-times"></i>
       </button>
     </div>
     <div class="modal-body">
-      <p>Payment #{{paiementToReject?.id}} - {{paiementToReject?.nomPatient}}</p>
-      <div class="form-group">
-        <label>Reason for rejection:</label>
-        <textarea [(ngModel)]="rejectionReason" placeholder="Enter reason..."></textarea>
+      <div class="discount-detail">
+        <!-- Patient and Payment Info -->
+        <div class="detail-section">
+          <div class="detail-row">
+            <div class="detail-item">
+              <span class="detail-label">Patient Name</span>
+              <span class="detail-value">{{selectedDiscountPayment.nomPatient}}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Original Amount</span>
+              <span class="detail-value">{{selectedDiscountPayment.montant | currency:'TND'}}</span>
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-item">
+              <span class="detail-label">Requested Discount</span>
+              <span class="detail-value">{{selectedDiscountPayment.discountApplied| currency:'TND'}} ({{selectedDiscountPayment.discountPercentage}}%)</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Status</span>
+              <span class="detail-value status-badge" [ngClass]="getDiscountStatusClass(selectedDiscountPayment)">
+                {{getDiscountStatusDisplay(selectedDiscountPayment)}}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Disability Card Section -->
+        <div class="detail-section" *ngIf="selectedDiscountPayment.discountRequested">
+          <h4>Disability Verification</h4>
+          <div class="disability-card-container">
+            <div class="card-preview" (click)="viewDisabilityCard(selectedDiscountPayment)">
+              <i class="fas fa-id-card"></i>
+              <span>View Disability Card</span>
+            </div>
+            <div class="card-info">
+              <p *ngIf="selectedDiscountPayment.discountStatus === 'PENDING'">
+                <i class="fas fa-info-circle"></i> Please verify the disability card before approving
+              </p>
+              <p *ngIf="selectedDiscountPayment.discountStatus === 'REJECTED'">
+                <i class="fas fa-times-circle"></i> Rejected on {{selectedDiscountPayment.datePaiement| date}}
+                <br>
+                <span class="rejection-reason" *ngIf="selectedDiscountPayment.rejectionReason">
+                  <strong>Reason:</strong> {{selectedDiscountPayment.rejectionReason}}
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="detail-actions" *ngIf="isAdmin">
+          <ng-container *ngIf="selectedDiscountPayment.discountStatus === 'PENDING'">
+            <button class="btn-success" (click)="approveDiscount(selectedDiscountPayment)">
+              <i class="fas fa-check"></i> Approve Discount
+            </button>
+            <button class="btn-danger" (click)="openRejectDialog(selectedDiscountPayment)">
+              <i class="fas fa-times"></i> Reject Discount
+            </button>
+          </ng-container>
+          
+          <button class="btn-secondary" (click)="closeDiscountModal()">
+            <i class="fas fa-arrow-left"></i> Back to List
+          </button>
+        </div>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-secondary" (click)="closeRejectDialog()">Cancel</button>
-      <button class="btn-danger" 
-              [disabled]="!rejectionReason" 
-              (click)="rejectDiscount(paiementToReject!, rejectionReason)">
-        Confirm Rejection
-      </button>
     </div>
   </div>
 </div>
 
-<!-- Add this modal for viewing disability card -->
+<!-- Disability Card Full View Modal -->
 <div class="modal-overlay" *ngIf="viewedDisabilityCard">
-  <div class="modal-container">
+  <div class="modal-container image-viewer">
     <div class="modal-header">
-      <h3>Disability Card</h3>
-      <button class="btn-close" (click)="viewedDisabilityCard = null">
+      <h3>Disability Card Verification</h3>
+      <button class="btn-close" (click)="closeCardModal()">
         <i class="fas fa-times"></i>
       </button>
     </div>
     <div class="modal-body">
-      <div class="card-image-container">
+      <div class="image-container">
         <img [src]="viewedDisabilityCard" alt="Disability Card">
       </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-primary" (click)="viewedDisabilityCard = null">Close</button>
+      <div class="image-actions">
+        <button class="btn-secondary" (click)="closeCardModal()">
+          <i class="fas fa-times"></i> Close
+        </button>
+      </div>
     </div>
   </div>
 </div>
+
+<!-- Reject Discount Dialog -->
+<div class="modal-overlay" *ngIf="showRejectDialog">
+  <div class="modal-container small">
+    <div class="modal-header">
+      <h3>Reject Discount Request</h3>
+      <button class="btn-close" (click)="cancelReject()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="confirmReject()">
+        <div class="form-group">
+          <label>Reason for Rejection*</label>
+          <textarea [(ngModel)]="rejectionReason" name="rejectionReason" required></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" (click)="cancelReject()">
+            Cancel
+          </button>
+          <button type="submit" class="btn-danger" [disabled]="!rejectionReason">
+            Confirm Rejection
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 </div>

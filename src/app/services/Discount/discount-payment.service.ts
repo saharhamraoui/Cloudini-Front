@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Paiement } from 'src/app/model/Paiement';
 import { environment } from 'src/environments/environment.development';
 
 const NAV_URL = environment.apiURL+"/api/discount-requests";
@@ -28,15 +27,15 @@ export class DiscountPaymentService {
   }
 
 
-  // Add these methods to your paiement.service.ts
-approveDiscount(paymentId: number): Observable<Paiement> {
-  return this.http.put<Paiement>(`${NAV_URL}/${paymentId}/approve-discount`, {});
-}
+  approveDiscount(paymentId: number): Observable<any> {
+    return this.http.post(`${NAV_URL}/${paymentId}/approve`, {});
+  }
+  
+  rejectDiscount(paymentId: number, reason: string): Observable<any> {
+    return this.http.post(`${NAV_URL}/${paymentId}/reject`, { reason });
+  }
 
-rejectDiscount(paymentId: number, reason: string): Observable<Paiement> {
-  return this.http.put<Paiement>(`${NAV_URL}/${paymentId}/reject-discount`, { reason });
-}
-
+// In your DiscountPaymentService
 getDisabilityCard(paymentId: number): Observable<ArrayBuffer> {
   return this.http.get(`${NAV_URL}/${paymentId}/disability-card`, {
     responseType: 'arraybuffer'

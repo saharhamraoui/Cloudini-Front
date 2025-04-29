@@ -14,13 +14,15 @@ export interface Paiement {
     emailMedecin?: string;
     fraudProbability?: number;
     emailPatient?: string;
-    
     // Discount Fields
+    requestMessage?:string
     disabilityCardId?: string;
     discountApplied?: number;
     discountRequested?: boolean;
     discountApproved?: boolean;
     discountPercentage?: number;
     discountStatus?: DiscountStatus;
+    rejectionReason?: string;  // Stores why the discount was rejected
+    disabilityCardImage?: any | ArrayBuffer | string;
 
 }

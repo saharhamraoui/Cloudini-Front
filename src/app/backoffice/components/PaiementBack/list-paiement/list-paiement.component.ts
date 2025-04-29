@@ -26,6 +26,7 @@ export class ListPaiementComponent {
   itemsPerPage: number = 5;
   totalPages: number = 1;
   
+  openCard:boolean = false ;
   isAddFormVisible: boolean = false;
   isEditFormVisible: boolean = false;
   viewedPayment: Paiement | null = null;
@@ -39,6 +40,7 @@ export class ListPaiementComponent {
     statut: PaymentStatus.Paid
   };
   
+  statusOfDiscount:DiscountStatus =DiscountStatus.REJECTED;
   PaymentStatus = PaymentStatus;
   sortField: string = 'datePaiement';
   sortDirection: 'asc' | 'desc' = 'desc';
@@ -408,55 +410,27 @@ showDiscountActions(paiement: Paiement): boolean | undefined{
   return paiement.discountRequested && paiement.discountStatus === DiscountStatus.PENDING;
 }
 
-approveDiscount(paiement: Paiement): void {
-  if (confirm(`Approve 20% discount for ${paiement.nomPatient}?`)) {
-    this.discountService.approveDiscount(paiement.id!).subscribe({
-      next: (updatedPaiement) => {
-        // Update the payment in the local array
-        const index = this.paiements.findIndex(p => p.id === paiement.id);
-        if (index !== -1) {
-          this.paiements[index] = updatedPaiement;
-        }
-        this.loadPaiements();
-      },
-    });
-  }
+
+successMessage:any;
+errorMessage: any;
+private showSuccess(message: string): void {
+  this.successMessage = message;
+  setTimeout(() => this.successMessage = '', 5000);
 }
 
-openRejectDialog(paiement: Paiement): void {
-  this.paiementToReject = paiement;
-  this.rejectionReason = '';
-  this.isRejectDialogVisible = true;
+private showError(message: string): void {
+  this.errorMessage = message;
+  setTimeout(() => this.errorMessage = '', 5000);
 }
+
+
+
 
 closeRejectDialog(): void {
   this.isRejectDialogVisible = false;
 }
 
-rejectDiscount(paiement: Paiement, reason: string): void {
-  this.discountService.rejectDiscount(paiement.id!, reason).subscribe({
-    next: () => {
-      this.loadPaiements();
-      this.closeRejectDialog();
-    },
-  });
-}
 
-viewDisabilityCard(paiement: Paiement): void {
-  if (paiement.disabilityCardId) {
-    this.discountService.getDisabilityCard(paiement.id!).subscribe({
-      next: (imageData) => {
-        // Convert ArrayBuffer to base64
-        const binary = new Uint8Array(imageData);
-        let binaryString = '';
-        binary.forEach(byte => {
-          binaryString += String.fromCharCode(byte);
-        });
-        this.viewedDisabilityCard = 'data:image/jpeg;base64,' + window.btoa(binaryString);
-      },
-    });
-  }
-}
 
 loadPaiements(): void {
   this.paiementService.getPaiements().subscribe({
@@ -726,4 +700,142 @@ private createPaymentMethodChart(): void {
   });
 }
 
+
+//discount modal 
+// Component properties to add
+selectedDiscountPayment: Paiement | null = null;
+showRejectDialog = false;
+isAdmin = true; // Set this based on your auth logic
+
+
+
+
+
+
+
+// Get disability card image
+getDisabilityCardImage(payment: Paiement): string {
+  return 'data:image/jpeg;base64,' + this.arrayBufferToBase64(payment.disabilityCardImage);
+}
+
+
+
+
+
+
+
+
+
+
+
+// Helper method to convert ArrayBuffer to base64
+private arrayBufferToBase64(buffer: ArrayBuffer): string {
+  const binary = new Uint8Array(buffer);
+  let binaryString = '';
+  binary.forEach(byte => {
+    binaryString += String.fromCharCode(byte);
+  });
+  return window.btoa(binaryString);
+}
+
+// Reject dialog methods
+openRejectDialog(payment: Paiement) {
+  this.selectedDiscountPayment = payment;
+  this.showRejectDialog = true;
+  this.rejectionReason = '';
+}
+
+cancelReject() {
+  this.showRejectDialog = false;
+}
+
+confirmReject() {
+  if (this.rejectionReason && this.selectedDiscountPayment?.id) {
+    this.discountService.rejectDiscount(
+      this.selectedDiscountPayment.id, 
+      this.rejectionReason
+    ).subscribe({
+      next: () => {
+        this.showRejectDialog = false;
+        this.loadPaiements(); // Refresh the list
+        this.closeDiscountModal();
+      },
+      error: (err) => console.error('Error rejecting discount:', err)
+    });
+  }
+}
+
+
+
+// Method to open the discount modal
+openDiscountModal(payment: Paiement) {
+  this.selectedDiscountPayment = payment;
+}
+
+// Method to close the discount modal
+closeDiscountModal() {
+  this.selectedDiscountPayment = null;
+  this.rejectionReason = '';
+}
+
+// Updated viewDisabilityCard function
+viewDisabilityCard(payment: Paiement): void {
+  if (!payment.id) return;
+  
+  this.discountService.getDisabilityCard(payment.id).subscribe({
+    next: (imageData: ArrayBuffer) => {
+      if (imageData) {
+        // Convert ArrayBuffer to base64
+        const binary = new Uint8Array(imageData);
+        let binaryString = '';
+        binary.forEach(byte => {
+          binaryString += String.fromCharCode(byte);
+        });
+        this.viewedDisabilityCard = 'data:image/jpeg;base64,' + window.btoa(binaryString);
+      } else {
+        this.viewedDisabilityCard = null;
+      }
+    },
+    error: (err) => {
+      console.error('Error loading disability card:', err);
+      this.viewedDisabilityCard = null;
+    }
+  });
+}
+
+closeCardModal(): void {
+  this.viewedDisabilityCard = null;
+}
+
+// Approve discount
+approveDiscount(payment: Paiement) {
+  if (!payment.id) return;
+  
+  this.discountService.approveDiscount(payment.id).subscribe({
+    next: (updatedPayment) => {
+      this.selectedDiscountPayment = updatedPayment;
+    },
+    error: (err) => {
+      console.error('Error approving discount:', err);
+      // Show error message to user
+    }
+  });
+}
+
+// Reject discount
+rejectDiscount() {
+  if (!this.selectedDiscountPayment?.id || !this.rejectionReason) return;
+  
+  this.discountService.rejectDiscount(
+    this.selectedDiscountPayment.id, 
+    this.rejectionReason
+  ).subscribe({
+    next: (updatedPayment) => {
+      this.selectedDiscountPayment = updatedPayment;
+      this.loadPaiements(); // Refresh the list
+      this.rejectionReason = '';
+    },
+    error: (err) => console.error('Error rejecting discount:', err)
+  });
+}
 }
