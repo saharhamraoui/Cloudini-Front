@@ -20,6 +20,15 @@ import { EditPostComponent } from './Blog/components/edit-post/edit-post.compone
 import { PostDetailsComponent } from './Blog/components/post-detail/post-detail.component';
 import { NotificationsComponent } from './Blog/components/notifications/notifications.component';
 import { ArticleSuggestionsComponent } from './Blog/components/article-suggestions-component/article-suggestions-component.component';
+import { TagInputModule } from 'ngx-chips';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { DiseaseComponent } from './components/disease/disease.component';
+const calendarRootModule = CalendarModule.forRoot({
+  provide: DateAdapter,
+  useFactory: adapterFactory,
+});
+
 @NgModule({
   declarations: [
     FrontofficeComponent,
@@ -38,6 +47,9 @@ import { ArticleSuggestionsComponent } from './Blog/components/article-suggestio
       PostDetailsComponent,
     NotificationsComponent,
   ArticleSuggestionsComponent,
+    DiseaseComponent,
+
+
   ],
   imports: [
     CommonModule,
@@ -46,6 +58,11 @@ import { ArticleSuggestionsComponent } from './Blog/components/article-suggestio
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    })
+
   ]
 })
 export class FrontofficeModule { }

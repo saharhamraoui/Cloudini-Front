@@ -2,12 +2,14 @@
   <!-- Titre avec bouton alignÃ© -->
   <div class="header-section" style="display: flex; justify-content: space-between; align-items: center;">
     <div>
-      <h2 class="page-title">Liste des Rendez-vous</h2>
+
+      <h2 class="page-title">List of Appointments</h2>
       <div class="divider"></div>
     </div>
     <button [routerLink]="['/back/addRendezVousBack']" class="add-btn-thead">
       <i class="fas fa-calendar-plus"></i>
-      <span>Ajouter un Rendez-vous</span>
+
+      <span>Add Appointment</span>
     </button>
 
   </div>
@@ -20,9 +22,10 @@
     <table class="modern-table">
       <thead>
         <tr>
-          <th>ID</th>
+
+
           <th>Date</th>
-          <th>MÃ©decin</th>
+          <th>Doctor</th>
           <th>Patient</th>
           <th>Statut</th>
           <th class="actions-header">Actions</th>
@@ -30,7 +33,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let rv of rvs">
-          <td data-label="ID">{{ rv.idRendezVous }}</td>
+
+
           <td data-label="Date">{{ rv.dateRendezVous | date:'dd MMM yyyy HH:mm' }}</td>
           <td data-label="MÃ©decin">
             <span class="doctor-badge">
@@ -60,8 +64,9 @@
 
               <button class="btn btn-primary btn-sm mb-2" style="background-color: #0e5551; border-color: #0e5551;" (click)="ajouterConsultation(rv.idRendezVous)">
                 <i class="fa fa-plus"></i> Ajouter Consultation
+                <i class="fa fa-plus"></i> Add Consultation
               </button>
-             
+
             </div>
           </td>
         </tr>

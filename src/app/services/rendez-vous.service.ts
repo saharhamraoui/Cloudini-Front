@@ -16,11 +16,11 @@ export class RendezVousService {
   constructor(private http: HttpClient) { }
 
   public getRendezVous(): Observable<RendezVous[]>{
-   
+
     return this.http.get<RendezVous[]>(this.urlServeurApi+"/pidb/rendezVous/GetAll");
   }
 
- 
+
 
   public getMedecins(): Observable<Medecin[]> {
     return this.http.get<Medecin[]>(this.urlServeurApi+"/pidb/rendezVous/getAllMedecins");
@@ -31,7 +31,7 @@ export class RendezVousService {
   }
 
   addRendezVous(rendezVous:RendezVous) {
-   
+
     return this.http.post<RendezVous>(
       `${this.urlServeurApi}/pidb/rendezVous/addRendezVous`,
       rendezVous,
@@ -39,37 +39,41 @@ export class RendezVousService {
   );
   }
   deleteRendezVous(id:number) :Observable<RendezVous> {
-   
+
    return this.http.delete<RendezVous>(`${this.urlServeurApi}/pidb/rendezVous/deleteRendezVous/${id}`);
 
   }
 
   // updateRendezVous(rendezVous: any): Observable<any> {
   //   return this.http.put(`${this.urlServeurApi}/pidb/rendezVous/updateRendezVous/${rendezVous.idRendezVous}`, rendezVous);
-    
+
   // }
 
   updateRendezVous(rendezVous: any): Observable<any> {
     return this.http.put(`${this.urlServeurApi}/pidb/rendezVous/updateRendezVous`, rendezVous);
   }
-  
+
   public getRendezVousByMedecin(medecinId: number): Observable<RendezVous[]> {
     return this.http.get<RendezVous[]>(`${this.urlServeurApi}/pidb/rendezVous/GetByMedecin/${medecinId}`);
   }
 
- 
-  
+
+
   // updateRendezVous(rendezVous: RendezVous): Observable<RendezVous> {
   //   return this.http.put<RendezVous>(`${this.urlServeurApi}/pidb/rendezVous/updateRendezVous`, rendezVous);
   // }
 
-  
+
 
   getRendezVousById(id:number) :Observable<RendezVous> {
     return this.http.get<RendezVous>(this.urlServeurApi+"/pidb/rendezVous/GetById/"+id);
-    
+
   }
 
- 
-  
+
+  getCreneauOptimal(medecinId: number): Observable<Date> {
+    return this.http.get<Date>(this.urlServeurApi+"/pidb/rendezVous/proposer-creneau/"+medecinId);
+  }
+
+
 }

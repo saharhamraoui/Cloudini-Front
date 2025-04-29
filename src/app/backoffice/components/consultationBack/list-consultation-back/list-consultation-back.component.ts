@@ -30,7 +30,7 @@ title = 'projectPi';
         this.listConsultation=donnes;
       },
       (erreur:HttpErrorResponse)=>{
-        console.log('Erreur de l\'API :',erreur); 
+        console.log('Erreur de l\'API :',erreur);
       }
 
     );
@@ -44,7 +44,7 @@ title = 'projectPi';
           console.log(data)
           console.log("deleted")
           this.listConsultation = this.listConsultation.filter((consultation: Consultation) => consultation.idConsultation !== id);
-  
+
         },
         error=>{
           console.log(error)
@@ -65,36 +65,39 @@ title = 'projectPi';
         this.selectedQRCodeRecordId = recordId ?? null;
       }
     }
-    
+
     getQRCodeData(record: Consultation): string {
       const notes = record.medicalRecord?.notes
         ? record.medicalRecord.notes.substring(0, 100) + '...'
         : 'Aucune note';
-    
+
       const diagnosis = record.medicalRecord?.diagnosis || 'N/A';
-      
+
       const createdAt = record.medicalRecord?.createdAt
         ? new Date(record.medicalRecord.createdAt).toLocaleDateString()
         : 'N/A';
-    
+
       const RendezVousDate = record.rendezVous.dateRendezVous
         ? new Date(record.rendezVous.dateRendezVous).toLocaleDateString()
         : 'N/A';
-    
+
       return `--- DOSSIER MÉDICAL ---
     ID Consultation: ${record.idConsultation ?? 'N/A'}
     Date Consultation: ${RendezVousDate}
-    
+
     Date Création Dossier: ${createdAt}
     Diagnostic: ${diagnosis}
     Notes: ${notes}`;
     }
-    
+
+
+
+
 
   }
-    
-    
- 
-    
-    
-  
+
+
+
+
+
+

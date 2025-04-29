@@ -56,6 +56,18 @@
   font-weight: 700;
 }
 
+
+.notification {
+  background-color: #ffeeba;
+  padding: 10px;
+  border: 1px solid #ffc107;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.notification h3 {
+  margin-top: 0;
+}
+
 /* Icônes spécifiques */
 .fa-prescription-bottle-alt { color: #2980b9; }
 .fa-user-md { color: #27ae60; }

@@ -9,6 +9,11 @@ import { PostDetailsComponent } from './Blog/components/post-detail/post-detail.
 import { EditPostComponent } from './Blog/components/edit-post/edit-post.component';
 import { ArticleSuggestionsComponent } from './Blog/components/article-suggestions-component/article-suggestions-component.component';
 import { NotificationsComponent } from './Blog/components/notifications/notifications.component';
+import { ListRendezVousComponent } from './components/rendezVous/list-rendez-vous/list-rendez-vous.component';
+import { AddRendezVousComponent } from './components/rendezVous/add-rendez-vous/add-rendez-vous.component';
+import { UpdateRendezVousComponent } from './components/rendezVous/update-rendez-vous/update-rendez-vous.component';
+import { ListConsultationComponent } from './components/consultation/list-consultation/list-consultation.component';
+import { DiseaseComponent } from './components/disease/disease.component';
 
 const routes: Routes = [
   {
@@ -23,7 +28,13 @@ const routes: Routes = [
       { path: 'post-detail/:id', component: PostDetailsComponent },
       { path: 'edit-post/:id', component: EditPostComponent },
       { path: 'article-suggestions', component: ArticleSuggestionsComponent },
-      { path: 'notifications', component: NotificationsComponent }
+      { path: 'notifications', component: NotificationsComponent },
+      { path:'list-rendez-vous',  component: ListRendezVousComponent},
+      { path:'addRendezVous',  component: AddRendezVousComponent},
+      {path: 'updaterendezvous/:id', component: UpdateRendezVousComponent },
+      { path:'list-consultation',  component: ListConsultationComponent},
+      { path:'disease',  component: DiseaseComponent},
+      { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
   }
 ];

@@ -16,11 +16,12 @@ import { AddRendezVousBackComponent } from './components/rendezVousBack/add-rend
 import { ListRendezVousBackComponent } from './components/rendezVousBack/list-rendez-vous-back/list-rendez-vous-back.component';
 import { UpdateRendezVousBackComponent } from './components/rendezVousBack/update-rendez-vous-back/update-rendez-vous-back.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { MatSnackBarModule } from '@angular/material/snack-bar'; // Ajoute ça
 @NgModule({
   declarations: [
     BackofficeComponent,
     SidebarComponent,
-  
+
     HeaderBackComponent,
        DoctordashboardComponent,
        AddConsultationBackComponent,
@@ -29,7 +30,7 @@ import { QRCodeModule } from 'angularx-qrcode';
        AddRendezVousBackComponent,
        ListRendezVousBackComponent,
        UpdateRendezVousBackComponent,
-  
+
   ],
   imports: [
     CommonModule,
@@ -38,8 +39,9 @@ import { QRCodeModule } from 'angularx-qrcode';
      HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
-        QRCodeModule 
-       
+        QRCodeModule ,
+        MatSnackBarModule, // AJOUTE LE MODULE ICI
+
   ]
 })
 export class BackofficeModule { }
