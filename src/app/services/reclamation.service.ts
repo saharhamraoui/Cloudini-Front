@@ -37,4 +37,6 @@ export class ReclamationService {
   getResponsesByReclamationId(reclamationId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.responseUrl}/getresponsebyRecid/${reclamationId}`);
   }
+
+  
 }
