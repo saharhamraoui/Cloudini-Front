@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Fournisseur } from '../model/Fournisseur';
-import { Observable } from 'rxjs';
-import { Medicament } from '../model/Medicament';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { Fournisseur } from '../model/Fournisseur';
+import { Medicament } from '../model/Medicament';
 
 @Injectable({
   providedIn: 'root'

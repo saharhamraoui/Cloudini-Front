@@ -15,8 +15,8 @@ interface ToggleLikeResponse {
 export class BlogService {
   constructor(private http: HttpClient) {}
 
-  private apiUrl = 'http://pi-spring-back:8087/pi/posts';
-  private tagsApiUrl = 'http://pi-spring-back:8087/pi/tags';
+  private apiUrl = 'http://192.168.1.118:30596/pi/posts';
+  private tagsApiUrl = 'http://192.168.1.118:30596/pi/tags';
 
   createPost(
     title: string,
@@ -54,7 +54,7 @@ export class BlogService {
     });
   }
  checkForBadWords(text: string): Observable<any> {
-    return this.http.post(`http://localhost:8087/pi/content-moderation/check`, { text });
+    return this.http.post(`http://192.168.1.118:30596/pi/content-moderation/check`, { text });
   }
 
 updatePost(postId: number, post: Post, userId: number) {

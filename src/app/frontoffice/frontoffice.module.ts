@@ -25,6 +25,12 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { HeaderFrontComponent } from './components/header-front/header-front.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { MedicalRecordFrontComponent } from './components/medicalRecordFront/medical-record-front/medical-record-front.component';
+import { DiscountRequestComponentComponent } from './components/paiementFront/discount-request-component/discount-request-component.component';
+import { PaiementClientTnComponent } from './components/paiementFront/paiement-client-tn/paiement-client-tn.component';
+import { PaiementClientComponent } from './components/paiementFront/paiement-client/paiement-client.component';
+import { PaymentListComponent } from './components/paiementFront/payment-list/payment-list.component';
+import { PrescriptionFrontComponent } from './components/PrescriptionFront/prescription-front/prescription-front.component';
 import { ReclamationFormComponent } from './components/reclamation-form/reclamation-form.component';
 import { ReclamationListComponent } from './components/reclamation-list/reclamation-list.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -37,13 +43,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { FrontofficeRoutingModule } from './frontoffice-routing.module';
 import { FrontofficeComponent } from './frontoffice.component';
-import { MedicalRecordFrontComponent } from './medicalRecordFront/medical-record-front/medical-record-front.component';
-import { DiscountRequestComponentComponent } from './paiementFront/discount-request-component/discount-request-component.component';
-import { PaiementClientTnComponent } from './paiementFront/paiement-client-tn/paiement-client-tn.component';
-import { PaiementClientComponent } from './paiementFront/paiement-client/paiement-client.component';
-import { PaymentListComponent } from './paiementFront/payment-list/payment-list.component';
-import { ChatBotComponent } from './PrescriptionFront/chat-bot/chat-bot.component';
-import { PrescriptionFrontComponent } from './PrescriptionFront/prescription-front/prescription-front.component';
+
+
 
 const calendarRootModule = CalendarModule.forRoot({
   provide: DateAdapter,
@@ -69,15 +70,11 @@ const calendarRootModule = CalendarModule.forRoot({
     NotificationsComponent,
   ArticleSuggestionsComponent,
     DiseaseComponent,
-    ChatBotComponent,
-    PrescriptionFrontComponent,
-    MedicalRecordFrontComponent,
     PaymentListComponent,
     BilanUploadComponent,
     BilanListComponent,
     PaiementClientComponent,
     PaiementClientTnComponent,
-    DiscountRequestComponentComponent,
     ReclamationFormComponent,
     ReclamationListComponent,
     RoleSelectionComponent,
@@ -87,7 +84,11 @@ const calendarRootModule = CalendarModule.forRoot({
     ForgotPasswordComponent,
     UserProfileComponent,
     EditProfileComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    PrescriptionFrontComponent,
+    MedicalRecordFrontComponent,
+    DiscountRequestComponentComponent
+    
 
 
   ],

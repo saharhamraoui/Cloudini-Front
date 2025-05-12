@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AiService {
-  private apiUrl = 'http://pi-spring-back:8087/pi/ai/suggest-articles';
+  private apiUrl = 'http://192.168.1.118:30596/pi/ai/suggest-articles';
 
   constructor(private http: HttpClient) {}
 

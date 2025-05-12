@@ -27,7 +27,7 @@ import { BilanListComponent } from '../../BilanFront/bilan-list/bilan-list.compo
 })
 export class MedicalRecordFrontComponent implements OnInit {
    currentUser = {
-    idUser: 2, // replace with actual id from DB after auto-increment
+    idUser: 1, // replace with actual id from DB after auto-increment
     email: 'medecin@gmail.com',
     firstName: 'ahmed',
     lastName: 'mohssen',

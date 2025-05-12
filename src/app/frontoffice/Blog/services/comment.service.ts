@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class CommentService {
-  private baseUrl = 'http://pi-spring-back:8087/pi/comments';
+  private baseUrl = 'http://192.168.1.118:30596/pi/comments';
 
   constructor(private http: HttpClient) {}
 

@@ -1,5 +1,5 @@
 export const environment = {
     production:true,
-    urlServiceApi: "http://pi-spring-back:8087/Pi",
-    apiURL:"http://pi-spring-back:8087/Pi"
+    urlServiceApi: "http://192.168.1.118:30596/Pi",
+    apiURL:"http://192.168.1.118:30596/Pi"
 };

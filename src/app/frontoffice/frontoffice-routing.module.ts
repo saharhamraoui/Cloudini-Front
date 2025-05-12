@@ -22,12 +22,13 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { RoleSelectionComponent } from './components/role-selection/role-selection.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { FrontofficeComponent } from './frontoffice.component';
-import { MedicalRecordFrontComponent } from './medicalRecordFront/medical-record-front/medical-record-front.component';
-import { DiscountRequestComponentComponent } from './paiementFront/discount-request-component/discount-request-component.component';
-import { PaiementClientTnComponent } from './paiementFront/paiement-client-tn/paiement-client-tn.component';
-import { PaiementClientComponent } from './paiementFront/paiement-client/paiement-client.component';
-import { PaymentListComponent } from './paiementFront/payment-list/payment-list.component';
-import { PrescriptionFrontComponent } from './PrescriptionFront/prescription-front/prescription-front.component';
+
+import { PrescriptionFrontComponent } from './components/PrescriptionFront/prescription-front/prescription-front.component';
+import { MedicalRecordFrontComponent } from './components/medicalRecordFront/medical-record-front/medical-record-front.component';
+import { DiscountRequestComponentComponent } from './components/paiementFront/discount-request-component/discount-request-component.component';
+import { PaiementClientTnComponent } from './components/paiementFront/paiement-client-tn/paiement-client-tn.component';
+import { PaiementClientComponent } from './components/paiementFront/paiement-client/paiement-client.component';
+import { PaymentListComponent } from './components/paiementFront/payment-list/payment-list.component';
 
 const routes: Routes = [
   {
