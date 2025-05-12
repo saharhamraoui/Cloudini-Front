@@ -5,8 +5,8 @@ import { Reclamation } from '../model/reclamation.model';
 
 @Injectable({ providedIn: 'root' })
 export class ReclamationService {
-  private apiUrl = 'http://localhost:8087/Pi/api/reclamations';
-  private responseUrl = 'http://localhost:8087/Pi/api/responses';
+  private apiUrl = 'http://pi-spring-back:8087/Pi/api/reclamations';
+  private responseUrl = 'http://pi-spring-back:8087/Pi/api/responses';
 
   constructor(private http: HttpClient) {}
 

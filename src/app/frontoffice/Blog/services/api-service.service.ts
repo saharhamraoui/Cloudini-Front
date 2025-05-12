@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AiService {
-  private apiUrl = 'http://localhost:8087/pi/ai/suggest-articles';
+  private apiUrl = 'http://pi-spring-back:8087/pi/ai/suggest-articles';
 
   constructor(private http: HttpClient) {}
 

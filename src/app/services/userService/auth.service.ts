@@ -13,10 +13,10 @@ import { User } from 'src/app/model/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8087/Pi/api/auth';
-  private apiUrl2 = 'http://localhost:8087/Pi/api';
-  private apiUrl3 = 'http://localhost:8087/Pi/api/face-auth';
-  private flaskApiUrl = 'http://localhost:5000';
+  private apiUrl = 'http://pi-spring-back:8087/Pi/api/auth';
+  private apiUrl2 = 'http://pi-spring-back:8087/Pi/api';
+  private apiUrl3 = 'http://pi-spring-back:8087/Pi/api/face-auth';
+  private flaskApiUrl = 'http://pi-spring-back:5000';
 
   constructor(private http: HttpClient) { }
 

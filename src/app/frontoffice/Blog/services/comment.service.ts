@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Comment } from '../models/comment.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommentService {
-  private baseUrl = 'http://localhost:8087/pi/comments';
+  private baseUrl = 'http://pi-spring-back:8087/pi/comments';
 
   constructor(private http: HttpClient) {}
 

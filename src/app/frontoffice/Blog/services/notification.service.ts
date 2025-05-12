@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Notification } from '../models/notification.model';
 
@@ -7,7 +7,7 @@ import { Notification } from '../models/notification.model';
   providedIn: 'root',
 })
 export class NotificationService {
-  private baseUrl = 'http://localhost:8087/pi/notifs'; // Changement de port et de chemin
+  private baseUrl = 'http://pi-spring-back:8087/pi/notifs'; // Changement de port et de chemin
 
   constructor(private http: HttpClient) {}
 

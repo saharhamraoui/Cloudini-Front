@@ -1,11 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { Post } from '../models/post.model';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 interface ToggleLikeResponse {
   success: boolean;
@@ -18,8 +15,8 @@ interface ToggleLikeResponse {
 export class BlogService {
   constructor(private http: HttpClient) {}
 
-  private apiUrl = 'http://localhost:8087/pi/posts';
-  private tagsApiUrl = 'http://localhost:8087/pi/tags';
+  private apiUrl = 'http://pi-spring-back:8087/pi/posts';
+  private tagsApiUrl = 'http://pi-spring-back:8087/pi/tags';
 
   createPost(
     title: string,

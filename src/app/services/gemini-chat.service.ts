@@ -7,7 +7,6 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class GeminiChatService {
-  //private apiUrl = 'http://localhost:8089/pi/api/chatbot'; 
   private apiUrl = environment.urlServiceApi;
 
   constructor(private http: HttpClient) {}
