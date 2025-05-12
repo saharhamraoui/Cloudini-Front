@@ -7,8 +7,8 @@ import { Role } from 'src/app/model/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://pi-spring-back:8087/Pi/users';
-  private authApiUrl = 'http://pi-spring-back:8087/Pi/api/auth'; 
+  private apiUrl = 'http://192.168.1.118:30596/Pi/users';
+  private authApiUrl = 'http://192.168.1.118:30596/Pi/api/auth'; 
 
   constructor(private http: HttpClient) { }
 
